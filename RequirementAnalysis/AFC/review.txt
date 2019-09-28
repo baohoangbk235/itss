@@ -1,0 +1,37 @@
+Lê Đức Anh --> Nguyễn Quang Anh
+
+Nội dung được review: 
+-Usecase: Display information
+-Usecase: Return ticket
+
+Review: bài phân tích về Display information khá đầy đủ cả về trình bay và nội dung 
+đúng phù hợp với biểu đồ mà cả nhóm đã làm.
+
+------------------------------------------------------------------------------------------
+
+Nguyễn Quang Anh --> Phạm Ngọc Bá
+
+Nội dung được review: Main flow of events of:
+- Usecase: "Process oneway ticket" 
+- Usecase: "Process 24h ticket"
+
+Đánh giá: một số action như "Hiển thị thông tin vé" và "Điều khiển cổng đóng/mở" 
+là thuộc usecase "Display information" và use case"Control the gate" nên không nên
+ra chi tiết trong phần này chỉ cần nêu ra một cách vắn tắt. Chẳng hạn ta có thể 
+gộp các action trên thành 1 action:"Gửi tín hiệu điều khiển đến màn hình và cổng
+vào ra"
+
+-------------------------------------------------------------------------------------------
+
+Phạm Ngọc Bá --> Hoàng Gia Bảo
+
+Nội dung review:
+- Usecase: Process prepaid card
+
+Review: Giữa sự kiện 3,4 khi khách hàng đi ra cần phải quét lại thẻ lấy id 1 lần nữa 
+Luồng 3a,5a là luồng exception flow.
+
+--------------------------------------------------------------------------------------------
+
+Hoàng Gia Bảo --> Lê Đức Anh
+
