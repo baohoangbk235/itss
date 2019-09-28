@@ -1,0 +1,13 @@
+Người review: Nguyễn Quang Anh
+
+Người được review: Phạm Ngọc Bá
+
+Nội dung được review: Main flow of events of:
+- Usecase: "Check oneway ticket" 
+- Usecase: "Check 24h ticket"
+
+Đánh giá: một số action như "Hiển thị thông tin vé" và "Điều khiển cổng đóng/mở" 
+là thuộc usecase "Display information" và use case"Control the gate" nên không nên
+ra chi tiết trong phần này chỉ cần nêu ra một cách vắn tắt. Chẳng hạn ta có thể 
+gộp các action trên thành 1 action:"Gửi tín hiệu điều khiển đến màn hình và cổng
+vào ra"
