@@ -1,0 +1,2 @@
+Giữa sự kiện 3,4 khi khách hàng đi ra cần phải quét lại thẻ lấy id 1 lần nữa 
+Luồng 3a,5a là luồng exception flow.
