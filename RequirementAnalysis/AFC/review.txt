@@ -35,3 +35,10 @@ Luồng 3a,5a là luồng exception flow.
 
 Hoàng Gia Bảo --> Lê Đức Anh
 
+Nội dung nhận xét:
+- Usecase: Control gate
+
+Nhận xét:
+ •Control gate không phải tác nhân thực hiện hành động mà là AFC system => AFC system sau khi nhận id của thẻ hoặc vé sẽ xử lý để gửi tín hiệu điều khiển đóng hoặc mở cổng
+ •Gate nhận tín hiệu từ AFC system sẽ đóng hoặc mở => open gate hoặc close gate
+
