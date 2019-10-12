@@ -1,0 +1,53 @@
+=================================================================================
+
+Lê Đức Anh -> Nguyễn Quang Anh
+Review:
+Biểu đồ theo tôi nghĩ là đã ổn về chức năng get in 24h ticket và get out 24h ticket
+
+=================================================================================
+
+Nguyễn Quang Anh -> Phạm Ngọc Bá
+Review:
+Bài làm ổn, không cần sửa hoặc bổ sung gì
+
+=================================================================================
+
+Phạm Ngọc Bá -> Hoàng Gia Bảo
+Review:
+
++ Nên tạo nhánh để làm việc cho tuần này (vd nhánh hw4 hay week 4),  không up trực tiếp lên nhánh master.
+
++ Lần sau ô tag tên reviewer khi pull request
+
++ Thiếu phần máy trả lại vé và khách lấy lại vé khi đi vào trong ga
+
++ T nghĩ phải có Message reply khi Ticket Checking Controller gửi Mess cho Gate
+
++ Theo usecase t nghĩ Ticket Recognizer, Gate là Actor
+
+
+=================================================================================
+
+Hoàng Gia Bảo -> Lê Đức Anh
+Review: 
+Biểu đồ còn thiếu nhiều, cần bổ sung:
+
+    Bổ sung screen và một cái boundary enttiy (trong astah) Card Information
+
+    Trường hợp vào ga:
+        Sau khi passenger put card thì card scanner sẽ lấy thông tin về ID của thẻ bằng message tự gửi cho chính nó
+        Card scanner sẽ gửi message yêu cầu một cái control (tìm trong astah) là Card Checking Controller để kiểm tra thông tin thẻ.
+        Car Card Checking Controller sẽ gửi message cho Card Information để yêu cầu lấy thông tin và Card Information sẽ reply lại thông tin thẻ.
+        Card Checking Controller sẽ gửi message cho screen để hiển thị thông tin
+        Card Checking Controller sẽ báo hiệu xác nhận chuyến đi bắt đầu (embarkation is recorded) bằng message gửi cho Card Information,
+        Sau đó, card checking controller sẽ so sánh số dư (balance) của thẻ với phí cơ bản (base fare) bằng message tự gửi cho chính nó
+        Trường hợp ngoại lệ: số dư ít hơn phí cơ bản, thì card checking controller sẽ gửi message yêu cầu cửa đóng (trường hợp này ông cần cho trong cái khung có chữ “opt” ở góc, giống như ví dụ của cô ấy)
+        Cuối cùng, card checking controller sẽ gửi message yêu cầu cửa mở
+
+    Trường hợp ra ga: Tương tự như bên trên, chỉ khác là card checking controller sẽ xử lý các bước sau:
+        Tính phí của chuyến đi (tự gửi message cho nó)
+        Trừ phí của chuyến đi vào số dư trong thẻ
+        Nếu số dư nhỏ hơn phí của chuyến đi → đóng cửa ( trường hợp ngoại lệ, cho trong khung), còn không thì yêu cầu cửa mở
+
+=================================================================================
+
