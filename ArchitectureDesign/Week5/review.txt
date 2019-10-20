@@ -1,0 +1,47 @@
+=================================================================================
+
+Lê Đức Anh -> Nguyễn Quang Anh
+Review:
++ bài làm theo t đã đầy đủ về các chức năng , tôi không có nhận xét gì thêm ạ 
+
+=================================================================================
+
+Nguyễn Quang Anh -> Phạm Ngọc Bá
+Review:
++ Trong Sequence diagram và Communication diagram: đối tượng “AFC controller” nghe còn khá chung chung, nên thay bằng “Check card controller”
++ Nên thêm một thực thể để lưu lịch sử các lần thực hiện giao dịch, ví dụ: thực thể UserHistory
++ Nên tạo ra 2 Class diagram cho từng use case get in và get out trước rồi mới tổng hợp lại thành một
+
+=================================================================================
+
+Phạm Ngọc Bá -> Hoàng Gia Bảo
+Review:
++> Biểu đồ Class và biểu đồ Communication làm khá ổn (do trục trặc phần mềm nên có nói là sẽ bổ sung file diagram sau)
+
++> Chưa bổ sung bản vẽ lại biểu đồ Sequence, tuy nhiên biểu đồ Communication đã có sửa đổi cập nhật so với bài tập week4
+
+=================================================================================
+
+Phạm NGọc Bá -> Lê Đức Anh
+Review: 
+
+
+->Biểu đồ sequence vẫn chưa thiết kế đúng theo phần đã  thảo luận trên lớp:
+
++ Tác nhân phải thông qua 1 interface để giao tiếp vs controller
+
++ Đặt tên AFC Database vẫn còn chung chung
+
+->Do thiết kế Sequence còn chưa đúng nên biểu đồ Communication được chuyển thành cũng chưa chính xác.
+
+->Biểu đồ Class:
+
++ Các tác nhân không phải là class vd: Passenger, Gate
+
++ Chưa mô tả đầy đủ các Class, cần bổ sung thêm các method và attribute cho class. Cần định nghĩa chính xác kiểu của method (không phải toàn bộ đều dùng void)
+
+→ Pull request chưa đúng y/c của nhóm. Cần tạo nhánh làm viêc cho mỗi tuần.
+
+
+=================================================================================
+
