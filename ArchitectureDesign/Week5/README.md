@@ -21,7 +21,7 @@ TIẾN ĐỘ:
 1. Lê Đức Anh : Hoàn thành nhiệm vụ, tuy nhiên còn thiếu file class diagram.
 2. Nguyễn Quang Anh : Hoàn thành.
 3. Phạm Ngọc Bá : Hoàn thành.
-4. Hoàng Gia Bảo : Đã gửi ảnh biểu đồ communicate vs biểu đồ class (chưa gửi file diagram), chưa up bản sửa đổi biểu đồ sequence. Chưa review cho Đức Anh 
+4. Hoàng Gia Bảo : Đã hoàn thành phần phân công. Chưa review cho Đức Anh 
 
 ---------------------------------------------------------------------------------
 
