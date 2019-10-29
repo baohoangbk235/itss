@@ -9,8 +9,8 @@ PHÂN CÔNG NHIỆM VỤ:
 4. Hoàng Gia Bảo : ScreenInterface, GateControlInterface
 
 TIẾN ĐỘ:
-1. Lê Đức Anh : Tham dự Jobfair nên xin lùi thời gian nộp 
-2. Nguyễn Quang Anh : 
+1. Lê Đức Anh : Đã gửi bài
+2. Nguyễn Quang Anh : Đã xong 
 3. Phạm Ngọc Bá : Đã xong 
 4. Hoàng Gia Bảo : Tham dự Jobfair nên xin lùi thời gian nộp 
 
