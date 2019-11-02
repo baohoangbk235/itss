@@ -8,3 +8,16 @@ Mô tả:
 + Client sẽ gửi yêu cầu SQL bằng một lệnh đặc biệt trên MySQL
 + Ứng dụng trên server sẽ phản hồi thông tin và trả về kết quả trên máy client
 - Sử dụng MySQL do tính linh hoạt, hiệu năng cao và an toàn của nó.
+
+Các bước thiết kế cơ sở dữ liệu từ sơ đồ thược thể liên kết:
+Bước 1: Xác định các mối quan hệ giữa các thực thể:
+- One to one 
+- One to Many 
+- Many to Many
+Bước 2: Chuẩn hóa cơ sở dữ liệu (1NF, 2NF, 3NF)
+- 1NF: + Các thuộc tính của bảng phải là nguyên tố
+       + Giá trị của các thuộc tính trên các hàng phải là đơn trị, không chứa nhóm lặp
+       + Không có một thuộc tính nào có giá trị có thể tính toán được từ một thuộc tính khác
+- 2NF: + Loại bỏ các thuộc tính không khóa phụ thuộc vào một bộ phận khóa chính và tách ra thành một bảng riêng, khóa chính của bảng là bộ phận của khóa mà chúng phụ thuộc vào.
+       + Các thuộc tính còn lại lập thành một quan hệ, khóa chính của nó là khóa chính ban đầu.
+- 3NF: + Mọi thuộc tính không khóa phụ thuộc bắc cầu vào thuộc tính khóa (nghĩa là tất cả các thuộc tính không khóa phải được suy ra trực tiếp từ thuộc tính khóa)
