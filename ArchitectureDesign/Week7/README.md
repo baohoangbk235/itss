@@ -1,4 +1,4 @@
-HOMEWORK WEEK 6: Hoàn thành Class Diagram
+HOMEWORK WEEK 6: Hoàn thành xây dựng CSDL
 
 -------------------------------------------------------------------------------
 PHÂN CÔNG NHIỆM VỤ:
@@ -16,6 +16,7 @@ TIẾN ĐỘ:
 3. Phạm Ngọc Bá : Đã hoàn thành.
 4. Hoàng Gia Bảo : Đã hoàn thành.
 
+Bài làm của mọi người được tổng hợp vào file DataModeling.docx trong folder Week7/PhamNgocBa
 ---------------------------------------------------------------------------------
 
 PHÂN CÔNG REVIEW:
