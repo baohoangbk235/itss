@@ -12,9 +12,9 @@ PHÂN CÔNG NHIỆM VỤ:
 
 TIẾN ĐỘ:
 1. Lê Đức Anh : 
-2. Nguyễn Quang Anh :
-3. Phạm Ngọc Bá : 
-4. Hoàng Gia Bảo : 
+2. Nguyễn Quang Anh : Đã hoàn thành.
+3. Phạm Ngọc Bá : Đã hoàn thành.
+4. Hoàng Gia Bảo : Đã hoàn thành.
 
 ---------------------------------------------------------------------------------
 
