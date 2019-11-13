@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -32,4 +33,18 @@ public class Ticket24hDAO {
         } 
         return arr;
     }
+    public static void update(Ticket24hDTO tk24) {
+		String sql = "update ticket24h set first_use=?, valid_time=? where id=?";
+		ConnectionUtills conUtil;
+		try {
+			conUtil = ConnectionUtills.getInstance();
+			PreparedStatement pst = conUtil.getConnection().prepareStatement(sql);
+			pst.setTimestamp(1, tk24.getFirst_use());
+			pst.setTimestamp(2, tk24.getValid_time());
+			pst.setString(3,tk24.getTk24_id());
+			pst.executeUpdate();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
 }

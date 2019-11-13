@@ -5,6 +5,7 @@ import java.util.List;
 import controller.CardController;
 import controller.Ticket24Controller;
 import controller.TicketOwController;
+import dao.CardsDAO;
 import dto.CardsDTO;
 import dto.Ticket24hDTO;
 import dto.TicketOnewayDTO;
@@ -39,5 +40,6 @@ public class Main {
 		for (TicketOnewayDTO c : list3) {
 			System.out.println("id: "+c.getTkow_id()+", release_time: "+c.getReleased_time());
 		}
+		//CardsDAO.update(list1.get(0));
 	}
 }

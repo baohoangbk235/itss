@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,10 +11,11 @@ import util.ConnectionUtills;
 
 public class CardsDAO {
 	//private List<CardsDTO> arr = new ArrayList<CardsDTO>();
+	
 	public static List<CardsDTO> getAll(){
 		List<CardsDTO> arr = new ArrayList<CardsDTO>();
 		String sql = "select * from cards";
-        ConnectionUtills conUtil;
+		ConnectionUtills conUtil;
 		try {
 			conUtil = ConnectionUtills.getInstance();
 			//mdah.open();
@@ -31,9 +33,18 @@ public class CardsDAO {
 		}
         return arr;
     }
-//	@Override
-//	public void update(CardsDTO card) {
-//		
-//		
-//	}
+	
+	public static void update(CardsDTO card) {
+		String sql = "update cards set balance=? where id=?";
+		ConnectionUtills conUtil;
+		try {
+			conUtil = ConnectionUtills.getInstance();
+			PreparedStatement pst = conUtil.getConnection().prepareStatement(sql);
+			pst.setFloat(1, card.getBalance()-3);
+			pst.setString(2, card.getCard_id());
+			pst.executeUpdate();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
 }

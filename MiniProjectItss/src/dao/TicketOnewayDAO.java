@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -33,4 +34,18 @@ public class TicketOnewayDAO {
         } 
         return arr;
     }
+    
+    public static void update(TicketOnewayDTO tkow) {
+		String sql = "update ticket24h set status=? where id=?";
+		ConnectionUtills conUtil;
+		try {
+			conUtil = ConnectionUtills.getInstance();
+			PreparedStatement pst = conUtil.getConnection().prepareStatement(sql);
+			pst.setBoolean(1, tkow.getStatus());
+			pst.setString(2,tkow.getTkow_id());
+			pst.executeUpdate();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
 }
