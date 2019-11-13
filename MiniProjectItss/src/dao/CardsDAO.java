@@ -1,22 +1,23 @@
 package dao;
 
-import dto.CardsDTO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import util.MysqlDataAccessHelper;
+import java.util.List;
+
+import dto.CardsDTO;
+import util.ConnectionUtills;
 
 public class CardsDAO {
-
-    public static ArrayList<CardsDTO> cardsAll(){
-
-        ArrayList<CardsDTO> arr = new ArrayList<CardsDTO>();
-        String sql = "select * from cards";
-        MysqlDataAccessHelper mdah = new MysqlDataAccessHelper();
-      
-        try {
-            mdah.open();
-            ResultSet rs = mdah.excuteQuery(sql);
+	//private List<CardsDTO> arr = new ArrayList<CardsDTO>();
+	public static List<CardsDTO> getAll(){
+		List<CardsDTO> arr = new ArrayList<CardsDTO>();
+		String sql = "select * from cards";
+        ConnectionUtills conUtil;
+		try {
+			conUtil = ConnectionUtills.getInstance();
+			//mdah.open();
+            ResultSet rs = conUtil.excuteQuery(sql);
             while(rs.next()){
                 CardsDTO card= new CardsDTO();
                 card.setCard_id(rs.getString("id"));
@@ -25,11 +26,14 @@ public class CardsDAO {
                 card.setBalance(rs.getFloat("balance"));
                 arr.add(card);
             }
-        } catch (SQLException ex) {
-            mdah.displayError(ex);
-        } finally{
-            mdah.close();
-        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
         return arr;
     }
+//	@Override
+//	public void update(CardsDTO card) {
+//		
+//		
+//	}
 }

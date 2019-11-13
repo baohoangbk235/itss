@@ -1,13 +1,14 @@
 package controller;
 
+import java.util.List;
+
 import dao.CardsDAO;
 import dto.CardsDTO;
-import java.util.ArrayList;
 
  public class CardController {
 
-    public static ArrayList<CardsDTO> cardsAll(){
-        return CardsDAO.cardsAll();
+    public static List<CardsDTO> getAll(){
+        return CardsDAO.getAll();
     }
 
 }

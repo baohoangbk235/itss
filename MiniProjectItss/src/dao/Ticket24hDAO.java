@@ -1,22 +1,23 @@
 package dao;
 
-import dto.Ticket24hDTO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import util.MysqlDataAccessHelper;
+import java.util.List;
+
+import dto.Ticket24hDTO;
+import util.ConnectionUtills;
 
 public class Ticket24hDAO {
 
-    public static ArrayList<Ticket24hDTO> tk24All(){
+    public static List<Ticket24hDTO> getAll(){
 
-        ArrayList<Ticket24hDTO> arr = new ArrayList<Ticket24hDTO>();
+        List<Ticket24hDTO> arr = new ArrayList<Ticket24hDTO>();
         String sql = "select * from ticket24h";
-        MysqlDataAccessHelper mdah = new MysqlDataAccessHelper();
-      
+        ConnectionUtills conUtil;
         try {
-            mdah.open();
-            ResultSet rs = mdah.excuteQuery(sql);
+            conUtil = ConnectionUtills.getInstance();
+            ResultSet rs = conUtil.excuteQuery(sql);
             while(rs.next()){
                 Ticket24hDTO tk24= new Ticket24hDTO();
                 tk24.setTk24_id(rs.getString("id"));
@@ -26,11 +27,9 @@ public class Ticket24hDAO {
                 tk24.setPrice(rs.getFloat("price"));
                 arr.add(tk24);
             }
-        } catch (SQLException ex) {
-            mdah.displayError(ex);
-        } finally{
-            mdah.close();
-        }
+        } catch (SQLException e) {
+        	e.printStackTrace();
+        } 
         return arr;
     }
 }
