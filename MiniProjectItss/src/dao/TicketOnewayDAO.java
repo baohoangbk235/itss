@@ -1,22 +1,23 @@
 package dao;
 
-import dto.TicketOnewayDTO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import util.MysqlDataAccessHelper;
+import java.util.List;
+
+import dto.TicketOnewayDTO;
+import util.ConnectionUtills;
 
 public class TicketOnewayDAO {
 
-    public static ArrayList<TicketOnewayDTO> tkowAll(){
+    public static List<TicketOnewayDTO> getAll(){
 
-        ArrayList<TicketOnewayDTO> arr = new ArrayList<TicketOnewayDTO>();
+        List<TicketOnewayDTO> arr = new ArrayList<TicketOnewayDTO>();
         String sql = "select * from ticket_oneway";
-        MysqlDataAccessHelper mdah = new MysqlDataAccessHelper();
-      
+        ConnectionUtills conUtil;
         try {
-            mdah.open();
-            ResultSet rs = mdah.excuteQuery(sql);
+            conUtil = ConnectionUtills.getInstance();
+            ResultSet rs = conUtil.excuteQuery(sql);
             while(rs.next()){
                 TicketOnewayDTO tkow= new TicketOnewayDTO();
                 tkow.setTkow_id(rs.getString("id"));
@@ -27,11 +28,9 @@ public class TicketOnewayDAO {
                 tkow.setStatus(rs.getBoolean("status"));
                 arr.add(tkow);
             }
-        } catch (SQLException ex) {
-            mdah.displayError(ex);
-        } finally{
-            mdah.close();
-        }
+        } catch (SQLException e) {
+        	e.printStackTrace();
+        } 
         return arr;
     }
 }
