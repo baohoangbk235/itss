@@ -41,7 +41,13 @@ local.properties
 .texlipse
 
 # STS (Spring Tool Suite)
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
 .springBeans
+.sts4-cache
 
 # Code Recommenders
 .recommenders/
@@ -54,3 +60,18 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
+
+ ### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+/bin/
