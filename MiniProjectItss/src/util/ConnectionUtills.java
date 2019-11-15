@@ -42,7 +42,6 @@ public class ConnectionUtills {
         return rs;
     }
     
-    
     public Connection getConnection() {
         return conn;
     }

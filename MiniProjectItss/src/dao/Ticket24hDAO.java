@@ -33,7 +33,28 @@ public class Ticket24hDAO {
         } 
         return arr;
     }
-    public static void update(Ticket24hDTO tk24) {
+    
+    public static Ticket24hDTO getTk24ById(String id){
+		Ticket24hDTO tk24 = new Ticket24hDTO();
+		String sql = "select * from ticket24h where id=\""+id+"\"";
+		ConnectionUtills conUtil;
+		try {
+			conUtil = ConnectionUtills.getInstance();
+            ResultSet rs = conUtil.excuteQuery(sql);
+            while(rs.next()){
+            	tk24.setTk24_id(rs.getString("id"));
+                tk24.setReleased_time(rs.getTimestamp("released_time"));
+                tk24.setFirst_use(rs.getTimestamp("first_use"));
+                tk24.setValid_time(rs.getTimestamp("valid_time"));
+                tk24.setPrice(rs.getFloat("price"));
+            }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+        return tk24;
+    }
+    
+    public static void updateTk24(Ticket24hDTO tk24) {
 		String sql = "update ticket24h set first_use=?, valid_time=? where id=?";
 		ConnectionUtills conUtil;
 		try {
