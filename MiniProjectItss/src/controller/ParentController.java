@@ -1,6 +1,6 @@
 package controller;
 
-public class TicketController {
+public class ParentController {
 	private Integer enterpoint;
 	private Integer exitpoint;
 	

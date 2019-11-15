@@ -42,15 +42,6 @@ public class ConnectionUtills {
         return rs;
     }
     
-    public void excuteUpdate(String sql){// update database
-        try {
-            Statement stm = (Statement) this.conn.createStatement();
-            stm.executeLargeUpdate(sql);
-        } catch (SQLException ex) {
-            displayError(ex);
-        }
-    }
-    
     public Connection getConnection() {
         return conn;
     }
