@@ -17,7 +17,6 @@ public class CardsDAO {
 		ConnectionUtills conUtil;
 		try {
 			conUtil = ConnectionUtills.getInstance();
-			//mdah.open();
             ResultSet rs = conUtil.excuteQuery(sql);
             while(rs.next()){
                 CardsDTO card= new CardsDTO();

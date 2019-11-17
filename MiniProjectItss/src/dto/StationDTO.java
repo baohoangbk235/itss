@@ -19,7 +19,7 @@ public class StationDTO {
 	public Float getDistance() {
 		return distance;
 	}
-	public void setDistance(Float distance) {
-		this.distance = distance;
+	public void setDistance(float i) {
+		this.distance = i;
 	}
 }
