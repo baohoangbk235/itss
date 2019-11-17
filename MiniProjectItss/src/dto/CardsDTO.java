@@ -9,6 +9,7 @@ public class CardsDTO {
     private Float balance;
     private Timestamp release_time;
     
+    public CardsDTO() {}
     /**
      * @return the card_id
      */
@@ -33,8 +34,8 @@ public class CardsDTO {
 	public Float getBalance() {
 		return balance;
 	}
-	public void setBalance(Float balance) {
-		this.balance = balance;
+	public void setBalance(float i) {
+		this.balance = i;
 	}
 	/**
      * @return the release_time

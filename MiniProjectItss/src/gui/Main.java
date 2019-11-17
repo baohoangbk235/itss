@@ -67,6 +67,8 @@ public class Main {
 		for (StationDTO st : list4) {
 			System.out.println("id: "+st.getSt_id()+", name: "+st.getSt_name()+ ", distance: "+st.getDistance());
 		}
+		System.out.println(c);
+		System.out.println(list1);
 		//CardsDAO.update(list1.get(0));
 	}
 }
