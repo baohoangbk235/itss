@@ -11,3 +11,4 @@ public final class Constants {
 	public static final Double EXTRA_FARE = 0.4;
 	private Constants() {}
 }
+ 
