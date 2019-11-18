@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import util.ConnectionUtills;
 public class PassHistoryDAO<T> {
 	public static List<PassHistoryDTO> getAll(){
 		List<PassHistoryDTO> arr = new ArrayList<PassHistoryDTO>();
-		String sql = "select * from station, station_distance where station.station_id = station_distance.station_id2";
+		String sql = "select * from pass_history";
 		ConnectionUtills conUtil;
 		try {
 			conUtil = ConnectionUtills.getInstance();
@@ -52,12 +53,37 @@ public class PassHistoryDAO<T> {
         return pass_history;
 	}
 	
-	public static void updatePassHistoryById() {
-		
+	public static void updatePassHistoryById(PassHistoryDTO ph) {
+		String sql = "update pass_history set checkinTime=?, st_id=? enter=? where id=?";
+		ConnectionUtills conUtil;
+		try {
+			conUtil = ConnectionUtills.getInstance();
+			PreparedStatement pst = conUtil.getConnection().prepareStatement(sql);
+			pst.setTimestamp(1, ph.getCheckinTime());
+			pst.setInt(2, ph.getSt_id());
+			pst.setBoolean(3, ph.isEnter());
+			pst.setString(4, ph.getId());
+			pst.executeUpdate();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+
 	}
 	
-	public static void insertPassHistory() {
-		
+	public static void insertPassHistory(PassHistoryDTO ph) {
+		String sql = "insert into pass_history(checkinTime, st_id, enter) values (?,?,?) where id=?";
+		ConnectionUtills conUtil;
+		try {
+			conUtil = ConnectionUtills.getInstance();
+			PreparedStatement pst = conUtil.getConnection().prepareStatement(sql);
+			pst.setTimestamp(1, ph.getCheckinTime());
+			pst.setInt(2, ph.getSt_id());
+			pst.setBoolean(3, ph.isEnter());
+			pst.setString(4, ph.getId());
+			pst.executeUpdate();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
 	}
 }
  
