@@ -1,7 +1,5 @@
 package gui;
 
-import java.util.concurrent.TimeUnit;
-
 import hust.soict.se.gate.Gate;
 
 public class GateInterface {

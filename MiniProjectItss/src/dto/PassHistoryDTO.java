@@ -3,6 +3,7 @@ package dto;
 import java.sql.Timestamp;
 
 public class PassHistoryDTO {
+	private int pass_id;
 	private String id;
 	private String getin_point;
 	private String getout_point;
@@ -64,6 +65,14 @@ public class PassHistoryDTO {
 	}
 	public void setGetout_time(Timestamp getout_time) {
 		this.getout_time = getout_time;
+	}
+
+	public int getPass_id() {
+		return pass_id;
+	}
+
+	public void setPass_id(int pass_id) {
+		this.pass_id = pass_id;
 	}
 	
 	

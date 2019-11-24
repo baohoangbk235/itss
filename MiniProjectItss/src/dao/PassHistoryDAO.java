@@ -3,6 +3,7 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,14 +36,15 @@ public class PassHistoryDAO {
 		}
         return arr;
     }
-	public static PassHistoryDTO getInfoById(String id) {
+	public static PassHistoryDTO getInfoById(int pass_id) {
 		PassHistoryDTO pass_history = new PassHistoryDTO();
-		String sql = "select * from passing_history where id = \""+ id + "\"";
+		String sql = "select * from passing_history where pass_id = \""+ pass_id + "\"";
 		ConnectionUtills conUtil;
 		try {
 			conUtil = ConnectionUtills.getInstance();
             ResultSet rs = conUtil.excuteQuery(sql);
             while(rs.next()){
+            	pass_history.setPass_id(rs.getInt("pass_id"));
             	pass_history.setId(rs.getString("id"));
                 pass_history.setGetin_point(rs.getString("getin_point"));
                 pass_history.setGetout_point(rs.getString("getout_point"));
@@ -56,20 +58,43 @@ public class PassHistoryDAO {
 		}
         return pass_history;
 	}
-	
+	public static PassHistoryDTO getInfo(String id, String getin_point, Timestamp getin_time) {
+		PassHistoryDTO pass_history = new PassHistoryDTO();
+		String sql = "select * from passing_history where id = \""+ id + "\" and getin_point = \""
+					+ getin_point + "\" and getin_time = \""+ getin_time + "\"";
+		ConnectionUtills conUtil;
+		try {
+			conUtil = ConnectionUtills.getInstance();
+            ResultSet rs = conUtil.excuteQuery(sql);
+            while(rs.next()){
+            	pass_history.setPass_id(rs.getInt("pass_id"));
+            	pass_history.setId(rs.getString("id"));
+                pass_history.setGetin_point(rs.getString("getin_point"));
+                pass_history.setGetout_point(rs.getString("getout_point"));
+                pass_history.setStatus(rs.getInt("pass_status"));
+                pass_history.setFare(rs.getFloat("fare"));
+                pass_history.setGetin_time(rs.getTimestamp("getin_time"));
+                pass_history.setGetout_time(rs.getTimestamp("getout_time"));
+            }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+        return pass_history;
+	}
 	public static void updatePassHistoryById(PassHistoryDTO ph) {
-		String sql = "update passing_history set getin_point=?, getout_point=?, pass_status=?, fare=?, getin_time=?, getout_time=? where id=?";
+		String sql = "update passing_history set id=?, getin_point=?, getout_point=?, pass_status=?, fare=?, getin_time=?, getout_time=? where pass_id=?";
 		ConnectionUtills conUtil;
 		try {
 			conUtil = ConnectionUtills.getInstance();
 			PreparedStatement pst = conUtil.getConnection().prepareStatement(sql);
-			pst.setString(1, ph.getGetin_point());
-			pst.setString(2, ph.getGetout_point());
-			pst.setInt(3, ph.getStatus());
-			pst.setFloat(4, ph.getFare());
-			pst.setTimestamp(5, ph.getGetin_time());
-			pst.setTimestamp(6, ph.getGetout_time());
-			pst.setString(7,ph.getId());
+			pst.setString(1, ph.getId());
+			pst.setString(2, ph.getGetin_point());
+			pst.setString(3, ph.getGetout_point());
+			pst.setInt(4, ph.getStatus());
+			pst.setFloat(5, ph.getFare());
+			pst.setTimestamp(6, ph.getGetin_time());
+			pst.setTimestamp(7, ph.getGetout_time());
+			pst.setInt(8,ph.getPass_id());
 			pst.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
