@@ -1,10 +1,10 @@
 package controller;
-import dao.Ticket24hDAO;
-import java.util.List;
-import dto.Ticket24hDTO;
-import java.util.Date;
 import java.sql.Timestamp;
-import java.text.ParseException;
+import java.util.Date;
+import java.util.List;
+
+import dao.Ticket24hDAO;
+import dto.Ticket24hDTO;
 
 public class Ticket24Controller {
 	public static List<Ticket24hDTO> getAll(){
@@ -20,10 +20,4 @@ public class Ticket24Controller {
 		return false;
 	}
 	
-	public static void main(String[] args) throws ParseException {
-		Ticket24hDAO a = new Ticket24hDAO();
-		Ticket24hDTO b = a.getTk24ById("bab1246b02772bb0");
-		Date date_now = new Date();
-		System.out.println(Ticket24Controller.checkTimeValidity(b, date_now));
-	}
 }
