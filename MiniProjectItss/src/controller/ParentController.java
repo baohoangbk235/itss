@@ -7,23 +7,19 @@ import util.Constants;
 public class ParentController {
 	private String enterpoint;
 	private String exitpoint;
-
-	public String getId() {
-		String id = null;
-		return id;
-	}
+	private String id;
 
 	public boolean checkBalance(double fare, double balance) {
-		if (balance > 0 && balance <= fare) {
+		if (balance >= fare) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	public float caculateDistance(String enterpoint,String exitpoint) {
-		StationDTO enterStation = StationDAO.getStationById(enterpoint);
-		StationDTO exitStation = StationDAO.getStationById(exitpoint);
+	public float caculateDistance() {
+		StationDTO enterStation = StationDAO.getStationById(this.getEnterpoint());
+		StationDTO exitStation = StationDAO.getStationById(this.getExitpoint());
 		return Math.abs(exitStation.getDistance() - enterStation.getDistance());
 	}
 
@@ -52,6 +48,12 @@ public class ParentController {
 	}
 	public void setExitpoint(String exitpoint) {
 		this.exitpoint = exitpoint;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

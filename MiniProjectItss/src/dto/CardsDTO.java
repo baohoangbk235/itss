@@ -6,8 +6,9 @@ public class CardsDTO {
 
     private String card_id;
     private String owner_id;
-    private Float balance;
+    private float balance;
     private Timestamp release_time;
+    private int last_pass;
     
     public CardsDTO() {}
     /**
@@ -31,7 +32,7 @@ public class CardsDTO {
 	/**
      * @return the Balance
      */
-	public Float getBalance() {
+	public float getBalance() {
 		return balance;
 	}
 	public void setBalance(float i) {
@@ -45,5 +46,11 @@ public class CardsDTO {
 	}
 	public void setRelease_time(Timestamp release_time) {
 		this.release_time = release_time;
+	}
+	public int getLast_pass() {
+		return last_pass;
+	}
+	public void setLast_pass(int last_pass) {
+		this.last_pass = last_pass;
 	}
 }

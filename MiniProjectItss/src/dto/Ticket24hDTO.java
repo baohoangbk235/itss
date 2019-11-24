@@ -6,9 +6,10 @@ public class Ticket24hDTO {
 
     private String tk24_id;
     private Timestamp released_time;
-    private Float price;
+    private float price;
     private Timestamp first_use;
     private Timestamp valid_time;
+    private int last_pass;
 	
     public String getTk24_id() {
 		return tk24_id;
@@ -22,10 +23,10 @@ public class Ticket24hDTO {
 	public void setReleased_time(Timestamp released_time) {
 		this.released_time = released_time;
 	}
-	public Float getPrice() {
+	public float getPrice() {
 		return price;
 	}
-	public void setPrice(Float price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
 	public Timestamp getFirst_use() {
@@ -39,5 +40,11 @@ public class Ticket24hDTO {
 	}
 	public void setValid_time(Timestamp valid_time) {
 		this.valid_time = valid_time;
+	}
+	public int getLast_pass() {
+		return last_pass;
+	}
+	public void setLast_pass(int last_pass) {
+		this.last_pass = last_pass;
 	}
 }

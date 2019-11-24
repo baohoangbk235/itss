@@ -15,11 +15,11 @@ public class ConnectionUtills {
 
     private ConnectionUtills() throws SQLException {
     	try{
-    		String serverTimezone = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
- 	       Driver driver = new Driver(); // Tá»« phiÃªn báº£n Java6 driver sáº½ tá»± Ä‘á»™ng Ä‘Æ°á»£c tÃ¬m kiáº¿m phÃ¹ há»£p nÃªn cÃ³ thá»ƒ bá»� Ä‘i dÃ²ng 18,19
- 	       DriverManager.registerDriver(driver);
- 	       String url = "jdbc:mysql://" + Constants.DB_HOST + ":" + Constants.DB_PORT + "/" + Constants.DB_DATABASE;
- 	       this.conn  = DriverManager.getConnection(url + serverTimezone, Constants.DB_USERNAME, Constants.DB_PASSWORD);
+    		String serverTimezone = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Ho_Chi_Minh";
+ 	       	Driver driver = new Driver(); // Tá»« phiÃªn báº£n Java6 driver sáº½ tá»± Ä‘á»™ng Ä‘Æ°á»£c tÃ¬m kiáº¿m phÃ¹ há»£p nÃªn cÃ³ thá»ƒ bá»� Ä‘i dÃ²ng 18,19
+ 	       	DriverManager.registerDriver(driver);
+ 	       	String url = "jdbc:mysql://" + Constants.DB_HOST + ":" + Constants.DB_PORT + "/" + Constants.DB_DATABASE;
+ 	       	this.conn  = DriverManager.getConnection(url + serverTimezone, Constants.DB_USERNAME, Constants.DB_PASSWORD);
 
         } catch(SQLException ex){
             displayError(ex);
