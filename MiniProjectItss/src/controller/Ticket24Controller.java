@@ -16,8 +16,11 @@ public class Ticket24Controller extends ParentController {
 	}
 
 	public boolean checkTimeValidity() {
-		
 		Timestamp now = new Timestamp(System.currentTimeMillis());
+		if(this.getTk24().getFirst_use()== null) {
+			this.getTk24().setFirst_use(now);
+			this.getTk24().setValid_time(new Timestamp(now.getTime() + 86400000));
+		}
 		if (now.before(this.getTk24().getValid_time())) {
 			return true;	
 		}

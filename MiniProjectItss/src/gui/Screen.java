@@ -16,6 +16,7 @@ public class Screen {
 		System.out.println("Available actions: 1-enter station, 2-exit station, type 'exit' to quit");
 		System.out.println("Your input: ");
 	}
+	
 	public static void printStationList() {
 		System.out.println("These are existing tickets/cards:");
 		System.out.println("\t•abcdefgh: One-way ticket between Chatelet and Olympiades: New –3.42 euros");
@@ -23,6 +24,10 @@ public class Screen {
 		System.out.println("\t•ABCDEFGH: Prepaid card: 5.65 euros");
 		System.out.println("\t•ponmlkji: 24h tickets: Valid until 14:35 -16th of May, 2019");
 		System.out.println("Please provide the ticket code you want to enter/exit:\n");	
+	}
+	
+	public static void printMess(){
+		
 	}
 	
 }
