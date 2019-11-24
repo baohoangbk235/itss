@@ -39,7 +39,7 @@ public class CardController extends ParentController {
 		}
 	}
 	public void getOutStationCard(String stselect) {
-		PassHistoryDTO ph = PassHistoryDAO.getInfoById(this.getCard().getLast_pass());
+		PassHistoryDTO ph = PassHistoryDAO.getInfoByPassId(this.getCard().getLast_pass());
 		this.setEnterpoint(ph.getGetin_point());
 		this.setExitpoint(String.valueOf(stselect.charAt(2)));
 		double fare = this.caculateTripFare(this.caculateDistance());

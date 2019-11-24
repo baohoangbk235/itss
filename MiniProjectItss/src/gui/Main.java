@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import controller.CardController;
 import controller.Ticket24Controller;
+import controller.TicketOwController;
 
 public class Main {
 	private static String stselect;
@@ -35,11 +36,17 @@ public class Main {
 				}
 			}else if(Main.checkPseudoCode()==0) {
 				Recognizer rc = new Recognizer(pseudo);
-				Ticket24Controller tk24control = new Ticket24Controller(rc.getCode16bits());
+//				Ticket24Controller tk24control = new Ticket24Controller(rc.getCode16bits());
+//				if(stselect.charAt(0)=='1') {
+//					tk24control.getInStationTk24(stselect);
+//				}else if(stselect.charAt(0)=='2') {
+//					tk24control.getOutStationTk24(stselect);
+//				}
+				TicketOwController tkowcontrol = new TicketOwController(rc.getCode16bits());
 				if(stselect.charAt(0)=='1') {
-					tk24control.getInStationTk24(stselect);
+					tkowcontrol.getInStationTkow(stselect);
 				}else if(stselect.charAt(0)=='2') {
-					tk24control.getOutStationTk24(stselect);
+					tkowcontrol.getOutStationTkow(stselect);
 				}
 			}}while(true);
 		}catch(Exception e) {

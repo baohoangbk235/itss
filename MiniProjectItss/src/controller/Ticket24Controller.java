@@ -38,7 +38,7 @@ public class Ticket24Controller extends ParentController {
 	}
 	
 	public void getOutStationTk24(String stselect) {
-		PassHistoryDTO ph = PassHistoryDAO.getInfoById(this.getTk24().getLast_pass());
+		PassHistoryDTO ph = PassHistoryDAO.getInfoByPassId(this.getTk24().getLast_pass());
 		ph.setGetout_point(String.valueOf(stselect.charAt(2)));
 		ph.setGetout_time(new Timestamp(System.currentTimeMillis()));
 		ph.setStatus(0);

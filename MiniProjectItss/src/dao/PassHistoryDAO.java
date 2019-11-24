@@ -36,7 +36,35 @@ public class PassHistoryDAO {
 		}
         return arr;
     }
-	public static PassHistoryDTO getInfoById(int pass_id) {
+	
+	public static PassHistoryDTO getInfoBySql(String sql) {
+		PassHistoryDTO pass_history = new PassHistoryDTO();
+		ConnectionUtills conUtil;
+		try {
+			conUtil = ConnectionUtills.getInstance();
+            ResultSet rs = conUtil.excuteQuery(sql);
+            while(rs.next()){
+            	pass_history.setPass_id(rs.getInt("pass_id"));
+            	pass_history.setId(rs.getString("id"));
+                pass_history.setGetin_point(rs.getString("getin_point"));
+                pass_history.setGetout_point(rs.getString("getout_point"));
+                pass_history.setStatus(rs.getInt("pass_status"));
+                pass_history.setFare(rs.getFloat("fare"));
+                pass_history.setGetin_time(rs.getTimestamp("getin_time"));
+                pass_history.setGetout_time(rs.getTimestamp("getout_time"));
+            }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+        return pass_history;
+	}
+	
+	public static PassHistoryDTO getInfoById(String id) {
+		String sql = "select * from passing_history where id = \""+ id + "\"";
+		return PassHistoryDAO.getInfoBySql(sql);
+	}
+	
+	public static PassHistoryDTO getInfoByPassId(int pass_id) {
 		PassHistoryDTO pass_history = new PassHistoryDTO();
 		String sql = "select * from passing_history where pass_id = \""+ pass_id + "\"";
 		ConnectionUtills conUtil;
