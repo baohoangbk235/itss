@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2019 at 02:22 PM
+-- Generation Time: Nov 24, 2019 at 03:59 PM
 -- Server version: 5.7.28-0ubuntu0.18.04.4
 -- PHP Version: 7.3.8
 
@@ -33,7 +33,7 @@ CREATE TABLE `cards` (
   `released_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `balance` float NOT NULL,
   `owner_id` varchar(16) NOT NULL DEFAULT '1234567890abcdef',
-  `last_pass` int(11) NOT NULL
+  `last_pass` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -41,9 +41,30 @@ CREATE TABLE `cards` (
 --
 
 INSERT INTO `cards` (`id`, `released_time`, `balance`, `owner_id`, `last_pass`) VALUES
-('9ac2197d9258257b', '2019-11-24 13:19:03', 87.1, 't93o5qqw90az7d2f', 0),
+('9ac2197d9258257b', '2019-11-24 14:38:57', 80.4, 't93o5qqw90az7d2f', 0),
 ('cv34567er0abcdef', '2019-11-13 22:58:53', 12, '1234567890abcdef', 0),
 ('mvght67er0abc336', '2019-11-13 18:41:47', 90, '1234567890abcdef', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `list_ticket`
+--
+
+CREATE TABLE `list_ticket` (
+  `id` varchar(16) NOT NULL,
+  `type` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `list_ticket`
+--
+
+INSERT INTO `list_ticket` (`id`, `type`) VALUES
+('aaa1246b0tt72bb0', 'ticket24h'),
+('bab1246b02772bb0', 'ticket24h'),
+('e8dc4081b13434b4', 'ticketoneway'),
+('07c84c6c4ba59f88', 'ticket24h');
 
 -- --------------------------------------------------------
 
@@ -73,7 +94,11 @@ INSERT INTO `passing_history` (`pass_id`, `id`, `getin_point`, `getout_point`, `
 (12, '9ac2197d9258257b', 'a', 'i', 0, 6.7, '2019-11-24 11:54:04.778', '2019-11-24 11:54:57.228'),
 (13, 'bab1246b02772bb0', 'a', 'i', 0, 0, '2019-11-24 12:33:57.933', '2019-11-24 12:34:36.080'),
 (14, 'e8dc4081b13434b4', 'd', 'g', 0, 3.1, '2019-11-24 13:13:30.442', '2019-11-24 13:14:07.366'),
-(15, '9ac2197d9258257b', 'b', 'e', 0, 3.1, '2019-11-24 13:18:52.416', '2019-11-24 13:19:03.272');
+(15, '9ac2197d9258257b', 'b', 'e', 0, 3.1, '2019-11-24 13:18:52.416', '2019-11-24 13:19:03.272'),
+(16, '9ac2197d9258257b', 'a', 'i', 0, 6.7, '2019-11-24 14:38:42.667', '2019-11-24 14:38:57.850'),
+(17, 'bab1246b02772bb0', 'c', 'h', 0, 0, '2019-11-24 14:40:01.133', '2019-11-24 14:40:12.123'),
+(18, 'e8dc4081b13434b4', 'e', 'g', 0, 2.3, '2019-11-24 14:41:15.280', '2019-11-24 14:41:25.746'),
+(19, '07c84c6c4ba59f88', 'a', 'i', 0, 0, '2019-11-24 14:54:39.661', '2019-11-24 14:54:56.645');
 
 -- --------------------------------------------------------
 
@@ -140,7 +165,7 @@ CREATE TABLE `ticket24h` (
   `first_use` datetime DEFAULT NULL,
   `valid_time` timestamp NULL DEFAULT NULL,
   `price` float NOT NULL DEFAULT '8.5',
-  `last_pass` int(11) NOT NULL
+  `last_pass` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -148,10 +173,18 @@ CREATE TABLE `ticket24h` (
 --
 
 INSERT INTO `ticket24h` (`id`, `released_time`, `first_use`, `valid_time`, `price`, `last_pass`) VALUES
-('07c84c6c4ba59f88', '2019-11-15 17:40:38', NULL, NULL, 8.5, 0),
-('7sad4ew3242sdf49', '2019-11-12 17:06:13', NULL, NULL, 8.5, 0),
-('asadaew3242sdf4c', '2019-11-15 17:44:25', NULL, NULL, 8.5, 0),
-('bab1246b02772bb0', '2019-11-24 12:34:36', '2019-11-24 07:12:00', '2019-11-25 00:12:00', 8.5, 0);
+('07c84c6c4ba59f88', '2019-11-24 14:54:56', '2019-11-24 21:54:40', '2019-11-25 14:54:40', 8.5, 0),
+('aaa1246b0tt72bb0', '2019-11-24 14:09:35', NULL, NULL, 8.5, 0),
+('bab1246b02772bb0', '2019-11-24 14:40:12', '2019-11-24 20:00:00', '2019-11-25 13:00:00', 8.5, 0);
+
+--
+-- Triggers `ticket24h`
+--
+DELIMITER $$
+CREATE TRIGGER `insert_into_listticket` AFTER INSERT ON `ticket24h` FOR EACH ROW INSERT INTO list_ticket
+VALUES (NEW.id,"ticket24h")
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -173,8 +206,16 @@ CREATE TABLE `ticket_oneway` (
 --
 
 INSERT INTO `ticket_oneway` (`id`, `released_time`, `price`, `start_station`, `exit_station`, `status`) VALUES
-('e8dc4081b13434b4', '2019-11-24 13:14:07', 3.42, 'd', 'i', 0),
-('g23de46k2k70xdw7', '2019-11-15 17:30:32', 2.5, 'c', 'g', 1);
+('e8dc4081b13434b4', '2019-11-24 14:41:25', 5.6, 'd', 'i', 0);
+
+--
+-- Triggers `ticket_oneway`
+--
+DELIMITER $$
+CREATE TRIGGER `insert_into_listticket2` AFTER INSERT ON `ticket_oneway` FOR EACH ROW INSERT INTO list_ticket
+VALUES (NEW.id,"ticketoneway")
+$$
+DELIMITER ;
 
 --
 -- Indexes for dumped tables
@@ -230,7 +271,7 @@ ALTER TABLE `ticket_oneway`
 -- AUTO_INCREMENT for table `passing_history`
 --
 ALTER TABLE `passing_history`
-  MODIFY `pass_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `pass_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables
