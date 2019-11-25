@@ -6,6 +6,7 @@ import dao.CardsDAO;
 import dao.PassHistoryDAO;
 import dto.CardsDTO;
 import dto.PassHistoryDTO;
+import gui.Screen;
 import util.Constants;
 
 public class CardController extends ParentController {
@@ -26,7 +27,7 @@ public class CardController extends ParentController {
 		else return false;
 	}
 
-	public void getInStationCard(String stselect) {
+	public void getInStationCard(String stselect) throws InterruptedException {
 		if(this.checkBalance()) {
 			this.setEnterpoint(String.valueOf(stselect.charAt(2)));
 			PassHistoryDTO ph = new PassHistoryDTO(this.getId(),this.getEnterpoint());
@@ -34,11 +35,12 @@ public class CardController extends ParentController {
 			PassHistoryDTO ph2 = PassHistoryDAO.getInfo(this.getId(), this.getEnterpoint(), ph.getGetin_time());
 			this.getCard().setLast_pass(ph2.getPass_id());
 			CardsDAO.updateCard(this.getCard());
+			Screen.printOpenMess("Prepaid card", this.getCard().getCard_id(), this.getCard().getBalance());
 		}else {
-			System.out.println("So du tai khoan khong du");
+			Screen.printErrorMessCard(this.getCard().getCard_id(), this.getCard().getBalance());
 		}
 	}
-	public void getOutStationCard(String stselect) {
+	public void getOutStationCard(String stselect) throws InterruptedException {
 		PassHistoryDTO ph = PassHistoryDAO.getInfoByPassId(this.getCard().getLast_pass());
 		this.setEnterpoint(ph.getGetin_point());
 		this.setExitpoint(String.valueOf(stselect.charAt(2)));
@@ -53,8 +55,9 @@ public class CardController extends ParentController {
 			ph.setStatus(0);
 			PassHistoryDAO.updatePassHistoryById(ph);
 			CardsDAO.updateCard(this.getCard());
+			Screen.printOpenMess("Prepaid card", this.getCard().getCard_id(), this.getCard().getBalance());
 		}else {
-			System.out.println("Khong du tien yeu cau nap them");
+			Screen.printErrorMess("Prepaid card", this.getCard().getCard_id(), this.getCard().getBalance(), (float) fare);
 		}
 	}
 	

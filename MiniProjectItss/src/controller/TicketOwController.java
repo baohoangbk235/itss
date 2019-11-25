@@ -8,6 +8,7 @@ import dao.TicketOnewayDAO;
 import dto.PassHistoryDTO;
 import dto.StationDTO;
 import dto.TicketOnewayDTO;
+import gui.Screen;
 
 public class TicketOwController extends ParentController {
 	private TicketOnewayDTO tkow;
@@ -33,21 +34,25 @@ public class TicketOwController extends ParentController {
 		return this.getTkow().getStatus();
 	}
 
-	public void getInStationTkow(String stselect) {
+	public void getInStationTkow(String stselect) throws InterruptedException {
 		if(this.checkStatus()) {
 			this.setEnterpoint(String.valueOf(stselect.charAt(2)));
 			if(this.checkEnterStation(this.getEnterpoint())) {
 				PassHistoryDTO ph = new PassHistoryDTO(this.getId(),this.getEnterpoint());
 				PassHistoryDAO.insertPassHistory(ph);
+				Screen.printOpenMess("Ticket one-way", this.getId(), this.getTkow().getPrice());
 			}else {
-				System.out.println("Nha ga nam ngoai pham vi");
+				StationDTO st = StationDAO.getStationById(this.getEnterpoint());
+				StationDTO st1 = StationDAO.getStationById(this.getTkow().getStart_station());
+				StationDTO st2 = StationDAO.getStationById(this.getTkow().getExit_station());
+				Screen.printErrorMessTkow2(this.getTkow().getTkow_id(), this.getTkow().getPrice(), st1.getSt_name(), st2.getSt_name(), st.getSt_name());
 			}
 		}else {
-			System.out.println("Ve da duoc su dung");
+			Screen.printErrorMessTkow();
 		}
 	}
 	
-	public void getOutStationTkow(String stselect) {
+	public void getOutStationTkow(String stselect) throws InterruptedException {
 		PassHistoryDTO ph = PassHistoryDAO.getInfoById(this.getTkow().getTkow_id());
 		this.setEnterpoint(ph.getGetin_point());
 		this.setExitpoint(String.valueOf(stselect.charAt(2)));
@@ -61,8 +66,9 @@ public class TicketOwController extends ParentController {
 			ph.setStatus(0);
 			PassHistoryDAO.updatePassHistoryById(ph);
 			TicketOnewayDAO.updateTkow(this.getTkow());
+			Screen.printOpenMess("Ticket one-way", this.getId(), this.getTkow().getPrice());
 		}else {
-			System.out.println("So tien hanh trinh vuot qua so tien mua ve");
+			Screen.printErrorMess("Ticket one-way", this.getId(), this.getTkow().getPrice(), (float) fare);
 		}
 	}
 	
