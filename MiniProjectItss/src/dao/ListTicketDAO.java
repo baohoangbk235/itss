@@ -19,6 +19,7 @@ public class ListTicketDAO {
                 ticket.setType(rs.getString("type"));
             }
 		} catch (SQLException e) {
+			System.out.println("Id khong ton tai trong database");
 			e.printStackTrace();
 		}
         return ticket;

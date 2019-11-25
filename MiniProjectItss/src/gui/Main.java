@@ -46,14 +46,14 @@ public class Main {
 					}else if(stselect.charAt(0)=='2') {
 						tk24control.getOutStationTk24(stselect);
 					}
-				}else {
+				}else if(ticket.getType().equals("ticketoneway")){
 					TicketOwController tkowcontrol = new TicketOwController(rc.getCode16bits());
 					if(stselect.charAt(0)=='1') {
 						tkowcontrol.getInStationTkow(stselect);
 					}else if(stselect.charAt(0)=='2') {
 						tkowcontrol.getOutStationTkow(stselect);
 					}
-				}
+				}else System.out.println("Id khong ton tai trong database");
 			}}while(true);
 		}catch(Exception e) {
 			e.printStackTrace();
