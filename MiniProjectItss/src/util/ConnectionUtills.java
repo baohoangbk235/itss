@@ -1,12 +1,8 @@
 package util;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
+import java.sql.*;
 import com.mysql.cj.jdbc.Driver;
+
 
 public class ConnectionUtills {
 
@@ -16,7 +12,7 @@ public class ConnectionUtills {
     private ConnectionUtills() throws SQLException {
     	try{
     		String serverTimezone = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Ho_Chi_Minh";
- 	       	Driver driver = new Driver(); 
+ 	       	java.sql.Driver driver = new Driver();
  	       	DriverManager.registerDriver(driver);
  	       	String url = "jdbc:mysql://" + Constants.DB_HOST + ":" + Constants.DB_PORT + "/" + Constants.DB_DATABASE;
  	       	this.conn  = DriverManager.getConnection(url + serverTimezone, Constants.DB_USERNAME, Constants.DB_PASSWORD);

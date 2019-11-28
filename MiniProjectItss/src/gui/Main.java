@@ -7,11 +7,21 @@ import controller.Ticket24Controller;
 import controller.TicketOwController;
 import dao.ListTicketDAO;
 import dto.ListTicketDTO;
+import util.Constants;
 
 public class Main {
 	private static String stselect;
 	private static String pseudo;
 	private static Scanner keyboard = new Scanner(System.in);
+
+
+	private static boolean isAvailableStationInput(String input) {
+		return input.matches(Constants.station_code_pattern);
+	}
+
+	private static boolean isAvailableCode(String input) {
+		return input.matches(Constants.ticket_code_pattern);
+	}
 
 	public static int checkPseudoCode(){
 		if(pseudo.length()!=8) return -1;
@@ -24,10 +34,20 @@ public class Main {
 			do {
 			Screen.printStationSelectionScreen();
 			stselect = keyboard.nextLine().trim();
+			while (!isAvailableStationInput(stselect) && !stselect.equals("exit")) {
+				System.out.println("Unavailable action, please enter again:");
+				stselect = keyboard.nextLine().trim();
+			}
 			if(stselect.equals("exit")) break;
-			Screen.printStationList();
+
+			Screen.printTicketList();
 			pseudo = keyboard.nextLine().trim();
-			
+			while (!isAvailableCode(pseudo) && !pseudo.equals("exit")) {
+				System.out.println("Wrong code, please enter again:");
+				pseudo = keyboard.nextLine().trim();
+			}
+
+
 			if(Main.checkPseudoCode()==1) {
 				CScanner scanner = new CScanner(pseudo);
 				CardController cardcontrol = new CardController(scanner.getCode16bits());
