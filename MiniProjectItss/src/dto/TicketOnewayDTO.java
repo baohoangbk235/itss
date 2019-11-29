@@ -11,7 +11,7 @@ public class TicketOnewayDTO {
 
     private String tkow_id;
     private Timestamp released_time;
-    private Float price;
+    private float price;
     private String start_station;
     private String exit_station;
     private Boolean status;
@@ -28,10 +28,10 @@ public class TicketOnewayDTO {
 	public void setReleased_time(Timestamp released_time) {
 		this.released_time = released_time;
 	}
-	public Float getPrice() {
+	public float getPrice() {
 		return price;
 	}
-	public void setPrice(Float price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
 	public String getStart_station() {

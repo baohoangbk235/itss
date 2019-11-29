@@ -10,6 +10,10 @@ import util.ConnectionUtills;
 
 public class StationDAO {
 		
+	/**
+	 * Lấy danh sách cách nhà ga lưu vào 1 List
+	 * @return Trả về danh sách nhà ga lưu dạng List(StationDTO)
+	 */
 	public static List<StationDTO> getAll(){
 		List<StationDTO> arr = new ArrayList<StationDTO>();
 		String sql = "select * from station, station_distance where station.station_id = station_distance.station_id2";
@@ -29,7 +33,11 @@ public class StationDAO {
 		}
         return arr;
     }
-	
+	/**
+	 * Lấy thông tin nhà ga từ database theo id của nó.
+	 * @param id Id nhà ga
+	 * @return Trả về 1 object StationDTO
+	 */
 	public static StationDTO getStationById(String id){
 		StationDTO station = new StationDTO();
 		String sql = "select * from station, station_distance where station.station_id = station_distance.station_id2 and station_id=\""+id+"\"";

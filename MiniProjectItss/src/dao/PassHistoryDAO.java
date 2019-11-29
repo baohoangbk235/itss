@@ -13,6 +13,10 @@ import util.ConnectionUtills;
 //import java.util.List;
 
 public class PassHistoryDAO {
+	/**
+	 * Lấy về danh sách lịch sử thông hành qua các nhà ga
+	 * @return Trả về danh sách lịch sử thông hành
+	 */
 	public static List<PassHistoryDTO> getAll(){
 		List<PassHistoryDTO> arr = new ArrayList<PassHistoryDTO>();
 		String sql = "select * from passing_history";
@@ -37,6 +41,11 @@ public class PassHistoryDAO {
         return arr;
     }
 	
+	/**
+	 * Truy vấn Select tới bản passing_history
+	 * @param sql Câu lệnh truy vấn Select
+	 * @return Trả về 1 object PassHistoryDTO 
+	 */
 	public static PassHistoryDTO getInfoBySql(String sql) {
 		PassHistoryDTO pass_history = new PassHistoryDTO();
 		ConnectionUtills conUtil;
@@ -59,21 +68,43 @@ public class PassHistoryDAO {
         return pass_history;
 	}
 	
+	/**
+	 * Lấy 1 bản ghi Lịch sử thông hành qua Id của vé/ticket đã được sử dụng
+	 * @param id 
+	 * @return Trả về 1 object PassHistoryDTO 
+	 */
 	public static PassHistoryDTO getInfoById(String id) {
-		String sql = "select * from passing_history where id = \""+ id + "\"";
+		String sql = "select * from passing_history where id = \""+ id + "\" order by getin_time desc";
 		return PassHistoryDAO.getInfoBySql(sql);
 	}
 	
+	/**
+	 * Lấy 1 bản ghi Lịch sử thông hành qua Id của nó
+	 * @param id 
+	 * @return Trả về 1 object PassHistoryDTO 
+	 */
 	public static PassHistoryDTO getInfoByPassId(int pass_id) {
 		String sql = "select * from passing_history where pass_id = \""+ pass_id + "\"";
         return PassHistoryDAO.getInfoBySql(sql);
 	}
 	
+	/**
+	 * Lấy 1 bản ghi Lịch sử thôg qua Id của vé/card đã đi qua, điểm vào, và thời gian vào.
+	 * @param id Id vé/thẻ
+	 * @param getin_point Nhà ga đã vào
+	 * @param getin_time Thời gian vào
+	 * @return Trả về 1 object PassHistoryDTO 
+	 */
 	public static PassHistoryDTO getInfo(String id, String getin_point, Timestamp getin_time) {
 		String sql = "select * from passing_history where id = \""+ id + "\" and getin_point = \""
 					+ getin_point + "\" and getin_time = \""+ getin_time + "\"";
         return PassHistoryDAO.getInfoBySql(sql);
 	}
+	
+	/**
+	 * Cập nhật lại Lịch sử thông hành trong CSDL
+	 * @param ph 1 object PassHistoryDTO  
+	 */
 	public static void updatePassHistoryById(PassHistoryDTO ph) {
 		String sql = "update passing_history set id=?, getin_point=?, getout_point=?, pass_status=?, fare=?, getin_time=?, getout_time=? where pass_id=?";
 		ConnectionUtills conUtil;
@@ -95,6 +126,10 @@ public class PassHistoryDAO {
 
 	}
 	
+	/**
+	 * Chèn thêm vào Lịch sử thông hành trong CSDL
+	 * @param ph 1 object PassHistoryDTO  
+	 */
 	public static void insertPassHistory(PassHistoryDTO ph) {
 		String sql = "insert into passing_history(id, getin_point, getout_point, pass_status, fare, getin_time, getout_time) values (?,?,?,?,?,?,?)";
 		ConnectionUtills conUtil;

@@ -19,6 +19,11 @@ public class TicketOwController extends ParentController {
 		this.tkow = TicketOnewayDAO.getTkowById(this.getId());
 	}
 
+	/**
+	 * Kiểm tra nhà ga muốn vào có nằm ngoài 2 nhà ga ghi trên vé hay không.
+	 * @param enterst Id nhà ga muốn vào.
+	 * @return Trả về true nếu không nằm ngoài, false nếu ngược lại
+	 */
 	public boolean checkEnterStation(String enterst) {
 		StationDTO enterstation = StationDAO.getStationById(enterst);
 		StationDTO startstation = StationDAO.getStationById(this.getTkow().getStart_station());
@@ -30,6 +35,10 @@ public class TicketOwController extends ParentController {
 		}
 	}
 
+	/**
+	 * Kiểm tra trạng thái sử dụng của ticket one-way
+	 * @return Trả về true nếu vẫn còn trạng thái sử dụng, false nếu ngược lại
+	 */
 	public boolean checkStatus() {
 		return this.getTkow().getStatus();
 	}

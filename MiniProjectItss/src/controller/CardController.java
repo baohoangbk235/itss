@@ -22,6 +22,10 @@ public class CardController extends ParentController {
 		this.card = CardsDAO.getCardById(this.getId());
 	}
 
+	/**
+	 * Kiểm tra số dư trong thẻ có lớn hơn số dư tối thiểu hay không
+	 * @return true nếu không ít hơn, false nếu ngược lại
+	 */
 	public boolean checkBalance() {
 		if(card.getBalance()>=Constants.MIN_BALANCE) return true;
 		else return false;

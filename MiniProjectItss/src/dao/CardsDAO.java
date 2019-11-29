@@ -8,6 +8,11 @@ import dto.CardsDTO;
 import util.ConnectionUtills;
 
 public class CardsDAO {
+	/**
+	 * Lấy về bản ghi card theo giá trị id truyền vào 
+	 * @param id Định danh của card
+	 * @return Trả về 1 object CardsDTO
+	 */
 	public static CardsDTO getCardById(String id){
 		CardsDTO card = new CardsDTO();
 		String sql = "select * from cards where id=\""+id+"\"";
@@ -27,6 +32,11 @@ public class CardsDAO {
 		}
         return card;
     }
+	
+	/**
+	 * Cập nhật thông tin thẻ vào database
+	 * @param card object CardsDTO chứa thông tin của card
+	 */
 	public static void updateCard(CardsDTO card) {
 		String sql = "update cards set balance=?,last_pass=? where id=?";
 		ConnectionUtills conUtil;

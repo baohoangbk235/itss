@@ -8,12 +8,12 @@ public class Ticket24ControllerTest {
 	private static Ticket24Controller tk24;
 	@Before
 	public void setUp() throws Exception {
-		tk24 = new Ticket24Controller("bab1246b02772bb0");
+		tk24 = new Ticket24Controller("testticket24h000");
 	}
 
 	@Test
 	public void test() {
 		boolean result = tk24.checkTimeValidity();
-		assertEquals(result, true);
+		assertEquals(false,result);
 	}
 }

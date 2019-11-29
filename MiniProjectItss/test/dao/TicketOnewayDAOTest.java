@@ -1,10 +1,9 @@
 package dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import dto.TicketOnewayDTO;
 
 public class TicketOnewayDAOTest {
@@ -15,8 +14,16 @@ public class TicketOnewayDAOTest {
 
 	@Test
 	public void testGetTkowById() {
-		tkow = TicketOnewayDAO.getTkowById("e8dc4081b13434b4");
-		assertEquals("OK", "e8dc4081b13434b4", tkow.getTkow_id());
+		tkow = TicketOnewayDAO.getTkowById("testticketoneway");
+		assertEquals("OK", "testticketoneway", tkow.getTkow_id());
 	}
 
+	@Test
+	public void testUpdateTkow() {
+		tkow = TicketOnewayDAO.getTkowById("testticketoneway");
+		tkow.setStatus(false);
+		TicketOnewayDAO.updateTkow(tkow);
+		TicketOnewayDTO tk2 = TicketOnewayDAO.getTkowById("testticketoneway");
+		assertEquals(false, tk2.getStatus());
+	}
 }

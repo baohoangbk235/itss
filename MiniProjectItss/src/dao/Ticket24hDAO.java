@@ -9,6 +9,11 @@ import util.ConnectionUtills;
 
 public class Ticket24hDAO {
 
+	/**
+	 * Lấy thông tin ticket 24h trong database theo id
+	 * @param id Id vé 24h
+	 * @return Trả về 1 object Ticket24hDTO
+	 */
     public static Ticket24hDTO getTk24ById(String id){
 		Ticket24hDTO tk24 = new Ticket24hDTO();
 		String sql = "select * from ticket24h where id=\""+id+"\"";
@@ -30,6 +35,10 @@ public class Ticket24hDAO {
         return tk24;
     }
     
+    /**
+     * Cập nhật thông tin 1 ticket 24h vào database
+     * @param tk24 Object Ticket24hDTO
+     */
     public static void updateTk24(Ticket24hDTO tk24) {
 		String sql = "update ticket24h set first_use=?, valid_time=?, last_pass=? where id=?";
 		ConnectionUtills conUtil;
