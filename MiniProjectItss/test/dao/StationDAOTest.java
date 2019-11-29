@@ -2,6 +2,8 @@ package dao;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,7 +17,8 @@ public class StationDAOTest {
 
 	@Test
 	public void testGetAll() {
-		fail("Not yet implemented");
+		List<StationDTO> list = StationDAO.getAll();
+		assertEquals(9, list.size());
 	}
 
 	@Test
@@ -28,7 +31,7 @@ public class StationDAOTest {
 		assertEquals("OK", "a", st.getSt_id());
 		assertEquals("OK", "Saint-Lazare", st.getSt_name());
 		assertEquals(0, st.getDistance(),0);
-		//assertEquals(s, st);
+		
 		}
 
 }
