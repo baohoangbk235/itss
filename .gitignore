@@ -66,6 +66,8 @@ local.properties
 *.iws
 *.iml
 *.ipr
+libs/
+out/
 
 ### NetBeans ###
 nbproject/private/

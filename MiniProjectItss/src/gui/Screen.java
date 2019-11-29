@@ -19,7 +19,7 @@ public class Screen {
 		System.out.println("Your input: ");
 	}
 	
-	public static void printStationList() {
+	public static void printTicketList() {
 		System.out.println("These are existing tickets/cards:");
 		System.out.println("\t•abcdefgh: One-way ticket between Chatelet and Olympiades: New –3.42 euros");
 		System.out.println("\t•ijklmnop: 24h tickets: New");
@@ -79,8 +79,8 @@ public class Screen {
 	}
 
 
-	 public static void pressAnyKeyToContinue()
-	 { 
+
+	 public static void pressAnyKeyToContinue(){ 
 	        System.out.println("Press Enter key to continue...");
 	        try
 	        {
@@ -89,4 +89,5 @@ public class Screen {
 	        catch(Exception e)
 	        {}  
 	 }
+
 }
