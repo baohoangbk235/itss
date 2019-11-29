@@ -7,6 +7,10 @@ import dto.ListTicketDTO;
 import util.ConnectionUtills;
 
 public class ListTicketDAO {
+	/**
+	 * Lấy thông tin vé từ bảng list_ticket
+	 * @param id id vé
+	 */
 	public static ListTicketDTO getTicketType(String id) {
 		ListTicketDTO ticket = new ListTicketDTO();
 		String sql = "select * from list_ticket where id = \"" + id + "\"";

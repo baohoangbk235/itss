@@ -15,6 +15,10 @@ public class Ticket24Controller extends ParentController {
 		this.tk24 = Ticket24hDAO.getTk24ById(this.getId());
 	}
 
+	/**
+	 * Kiểm tra vé 24h còn thời hạn sử dụng không.
+	 * @return Trả về true nếu còn hạn, false nếu ngược lại
+	 */
 	public boolean checkTimeValidity() {
 		Timestamp now = new Timestamp(System.currentTimeMillis());
 		if(this.getTk24().getFirst_use()== null) {
