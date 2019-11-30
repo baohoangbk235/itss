@@ -73,7 +73,7 @@ public class Main {
 					}else if(stselect.charAt(0)=='2') {
 						tkowcontrol.getOutStationTkow(stselect);
 					}
-				}else System.out.println("Id khong ton tai trong database");
+				}else System.out.println("Card or ticket not exist !");
 			}}while(true);
 		}catch(Exception e) {
 			e.printStackTrace();
