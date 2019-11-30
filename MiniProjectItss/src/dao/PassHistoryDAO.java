@@ -25,14 +25,15 @@ public class PassHistoryDAO {
 			conUtil = ConnectionUtills.getInstance();
             ResultSet rs = conUtil.excuteQuery(sql);
             while(rs.next()){
-                PassHistoryDTO pass_history = new PassHistoryDTO();
-                pass_history.setId(rs.getString("id"));
-                pass_history.setGetin_point(rs.getString("getin_point"));
-                pass_history.setGetout_point(rs.getString("getout_point"));
-                pass_history.setStatus(rs.getInt("pass_status"));
-                pass_history.setFare(rs.getFloat("fare"));
-                pass_history.setGetin_time(rs.getTimestamp("getin_time"));
-                pass_history.setGetout_time(rs.getTimestamp("getout_time"));
+				PassHistoryDTO pass_history = new PassHistoryDTO(
+						rs.getString("id"),
+						rs.getString("getin_point"),
+						rs.getString("getout_point"),
+						rs.getInt("pass_status"),
+						rs.getFloat("fare"),
+						rs.getTimestamp("getin_time"),
+						rs.getTimestamp("getout_time")
+				);
                 arr.add(pass_history);
             }
 		} catch (SQLException e) {
