@@ -2,8 +2,7 @@ package gui;
 
 import hust.soict.se.customexception.InvalidIDException;
 import hust.soict.se.scanner.CardScanner;
-
-public class CardScanner {
+public class CScanner {
 	private static CardScanner scanner = CardScanner.getInstance();
 	private String pseudoBarCode;
 	
@@ -11,7 +10,7 @@ public class CardScanner {
 	 * Khởi tạo CScanner 
 	 * @param pseudoBarCode Mã giả của thẻ, gồm 8 chữ cái hoa
 	 */
-	public CardScanner(String pseudoBarCode) {
+	public CScanner(String pseudoBarCode) {
 		super();
 		this.pseudoBarCode = pseudoBarCode;
 	}
