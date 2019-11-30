@@ -9,6 +9,13 @@ public class ParentController {
 	private String exitpoint;
 	private String id;
 
+
+	/**
+	 * Kiểm tra số dư trong thẻ hoặc vé có đủ để trả phí cho chuyến đi hay không
+	 * @param fare phí đi lại.
+	 * @param balance số dư trong thẻ hoặc vé.
+	 * @return Trả về true nếu số dư lớn hơn hoặc bằng phí đi lại, false nếu ngược lại
+	 */
 	public boolean checkBalance(double fare, double balance) {
 		if (balance >= fare) {
 			return true;

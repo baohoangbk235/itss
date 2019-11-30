@@ -11,8 +11,8 @@ import util.Constants;
 
 public class CardController extends ParentController {
 	private CardsDTO card;
-	
-    public CardController() {
+
+	public CardController() {
 		super();
 	}
 
@@ -23,14 +23,21 @@ public class CardController extends ParentController {
 	}
 
 	/**
-	 * Kiểm tra số dư trong thẻ có lớn hơn số dư tối thiểu hay không
-	 * @return true nếu không ít hơn, false nếu ngược lại
+	 * Kiểm tra số dư trong thẻ có lớn hơn số dư tối thiểu hay không.
+	 * @return true nếu không ít hơn, false nếu ngược lại.
 	 */
 	public boolean checkBalance() {
 		if(card.getBalance()>=Constants.MIN_BALANCE) return true;
 		else return false;
 	}
 
+
+	/**
+	 * Ghi lại các thông tin của thẻ và nhà ga vào trong bảng
+	 * passing_history khi hành khách đi vào.
+	 * @param stselect id của nhà ga khi đi vào .
+	 * @throws InterruptedException nếu có lỗi trong quá trình xử lý.
+	 */
 	public void getInStationCard(String stselect) throws InterruptedException {
 		if(this.checkBalance()) {
 			this.setEnterpoint(String.valueOf(stselect.charAt(2)));
@@ -44,12 +51,21 @@ public class CardController extends ParentController {
 			Screen.printErrorMessCard(this.getCard().getCard_id(), this.getCard().getBalance());
 		}
 	}
+
+	/**
+	 * Tính toán phí của chuyến đi và ghi lại các thông tin của thẻ, nhà ga, phí của chuyến đi
+	 * vào trong bảng passing_history khi hành khách đi ra.
+	 * @param stselect id của nhà ga khi đi ra .
+	 * @throws InterruptedException nếu có lỗi trong quá trình xử lý.
+	 */
 	public void getOutStationCard(String stselect) throws InterruptedException {
 		PassHistoryDTO ph = PassHistoryDAO.getInfoByPassId(this.getCard().getLast_pass());
 		this.setEnterpoint(ph.getGetin_point());
 		this.setExitpoint(String.valueOf(stselect.charAt(2)));
+
 		double fare = this.caculateTripFare(this.caculateDistance());
 		double balance = this.getCard().getBalance();
+
 		if(this.checkBalance(fare,balance)) {
 			this.getCard().setBalance((float)(balance-fare));
 			this.getCard().setLast_pass(0);
@@ -64,7 +80,7 @@ public class CardController extends ParentController {
 			Screen.printErrorMess("Prepaid card", this.getCard().getCard_id(), this.getCard().getBalance(), (float) fare);
 		}
 	}
-	
+
 	public CardsDTO getCard() {
 		return card;
 	}

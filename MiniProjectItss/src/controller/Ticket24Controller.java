@@ -8,7 +8,7 @@ import dto.Ticket24hDTO;
 
 public class Ticket24Controller extends ParentController {
 	private Ticket24hDTO tk24;
-	
+
 	public Ticket24Controller(String id) {
 		super();
 		this.setId(id);
@@ -26,11 +26,17 @@ public class Ticket24Controller extends ParentController {
 			this.getTk24().setValid_time(new Timestamp(now.getTime() + 86400000));
 		}
 		if (now.before(this.getTk24().getValid_time())) {
-			return true;	
+			return true;
 		}
 		return false;
 	}
-	
+
+	/**
+	 * Ghi lại các thông tin của vé và nhà ga vào trong bảng
+	 * passing_history khi hành khách đi vào.
+	 * @param stselect id của nhà ga khi đi vào .
+	 * @throws InterruptedException nếu có lỗi trong quá trình xử lý.
+	 */
 	public void getInStationTk24(String stselect) {
 		if(this.checkTimeValidity()) {
 			this.setEnterpoint(String.valueOf(stselect.charAt(2)));
@@ -43,7 +49,13 @@ public class Ticket24Controller extends ParentController {
 			System.out.println("Ve da qua thoi gian su dung");
 		}
 	}
-	
+
+	/**
+	 * Ghi lại các thông tin của vé và nhà ga vào trong bảng
+	 * passing_history khi hành khách đi ra.
+	 * @param stselect id của nhà ga khi đi ra.
+	 * @throws InterruptedException nếu có lỗi trong quá trình xử lý.
+	 */
 	public void getOutStationTk24(String stselect) {
 		PassHistoryDTO ph = PassHistoryDAO.getInfoByPassId(this.getTk24().getLast_pass());
 		ph.setGetout_point(String.valueOf(stselect.charAt(2)));
@@ -61,5 +73,5 @@ public class Ticket24Controller extends ParentController {
 	public void setTk24() {
 		this.tk24 = Ticket24hDAO.getTk24ById(this.getId());
 	}
-	
+
 }

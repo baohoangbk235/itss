@@ -15,6 +15,16 @@ public class PassHistoryDTO {
 	public PassHistoryDTO() {
 		super();
 	}
+
+	public PassHistoryDTO(String id, String getin_point, String getout_point, int status, float fare, Timestamp getin_time, Timestamp getout_time) {
+		this.id = id;
+		this.getin_point = getin_point;
+		this.getout_point = getout_point;
+		this.status = status;
+		this.fare = fare;
+		this.getin_time = getin_time;
+		this.getout_time = getout_time;
+	}
 	
 	public PassHistoryDTO(String id, String getin_point) {
 		super();
