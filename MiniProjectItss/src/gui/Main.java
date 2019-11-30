@@ -14,13 +14,14 @@ public class Main {
 	private static String pseudo;
 	private static Scanner keyboard = new Scanner(System.in);
 
-
-	private static boolean isAvailableStationInput(String input) {
-		return input.matches(Constants.station_code_pattern);
-	}
-
-	private static boolean isAvailableCode(String input) {
-		return input.matches(Constants.ticket_code_pattern);
+	/**
+	 * Kiểm tra xâu mà người dùng nhập có đúng định dạng hay không
+	 * @param input xâu mà người dùng nhập vào.
+	 * @param pattern định dạng mà người dùng muốn so sánh.
+	 * @return trả về true nếu xâu đúng định dạng và ngược lại
+	 */
+	private static boolean isAvailableAction(String input, String pattern) {
+		return input.matches(pattern);
 	}
 
 	public static int checkPseudoCode(){
@@ -32,49 +33,49 @@ public class Main {
 	public static void main(String[] args) {
 		try {
 			do {
-			Screen.printStationSelectionScreen();
-			stselect = keyboard.nextLine().trim();
-			while (!isAvailableStationInput(stselect) && !stselect.equals("exit")) {
-				System.out.println("Unavailable action, please enter again:");
+				Screen.printStationSelectionScreen();
 				stselect = keyboard.nextLine().trim();
-			}
-			if(stselect.equals("exit")) break;
-
-			Screen.printTicketList();
-			pseudo = keyboard.nextLine().trim();
-			while (!isAvailableCode(pseudo) && !pseudo.equals("exit")) {
-				System.out.println("Wrong code, please enter again:");
-				pseudo = keyboard.nextLine().trim();
-			}
-
-
-			if(Main.checkPseudoCode()==1) {
-				CScanner scanner = new CScanner(pseudo);
-				CardController cardcontrol = new CardController(scanner.getCode16bits());
-				if(stselect.charAt(0)=='1') {
-					cardcontrol.getInStationCard(stselect);
-				}else if(stselect.charAt(0)=='2') {
-					cardcontrol.getOutStationCard(stselect);
+				while (!isAvailableAction(stselect,Constants.station_code_pattern) && !stselect.equals("exit")) {
+					System.out.println("Unavailable action, please enter again:");
+					stselect = keyboard.nextLine().trim();
 				}
-			}else if(Main.checkPseudoCode()==0) {
-				Recognizer rc = new Recognizer(pseudo);
-				ListTicketDTO ticket = ListTicketDAO.getTicketType(rc.getCode16bits());
-				if(ticket.getType().equals("ticket24h")) {
-					Ticket24Controller tk24control = new Ticket24Controller(rc.getCode16bits());
+				if(stselect.equals("exit")) break;
+
+				Screen.printTicketList();
+				pseudo = keyboard.nextLine().trim();
+				while (!isAvailableAction(pseudo,Constants.ticket_code_pattern) && !pseudo.equals("exit")) {
+					System.out.println("Wrong code, please enter code (8-bit) again:");
+					pseudo = keyboard.nextLine().trim();
+				}
+
+
+				if(Main.checkPseudoCode()==1) {
+					CScanner scanner = new CScanner(pseudo);
+					CardController cardcontrol = new CardController(scanner.getCode16bits());
 					if(stselect.charAt(0)=='1') {
-						tk24control.getInStationTk24(stselect);
+						cardcontrol.getInStationCard(stselect);
 					}else if(stselect.charAt(0)=='2') {
-						tk24control.getOutStationTk24(stselect);
+						cardcontrol.getOutStationCard(stselect);
 					}
-				}else if(ticket.getType().equals("ticketoneway")){
-					TicketOwController tkowcontrol = new TicketOwController(rc.getCode16bits());
-					if(stselect.charAt(0)=='1') {
-						tkowcontrol.getInStationTkow(stselect);
-					}else if(stselect.charAt(0)=='2') {
-						tkowcontrol.getOutStationTkow(stselect);
-					}
-				}else System.out.println("Card or ticket not exist !");
-			}}while(true);
+				}else if(Main.checkPseudoCode()==0) {
+					Recognizer rc = new Recognizer(pseudo);
+					ListTicketDTO ticket = ListTicketDAO.getTicketType(rc.getCode16bits());
+					if(ticket.getType().equals("ticket24h")) {
+						Ticket24Controller tk24control = new Ticket24Controller(rc.getCode16bits());
+						if(stselect.charAt(0)=='1') {
+							tk24control.getInStationTk24(stselect);
+						}else if(stselect.charAt(0)=='2') {
+							tk24control.getOutStationTk24(stselect);
+						}
+					}else if(ticket.getType().equals("ticketoneway")){
+						TicketOwController tkowcontrol = new TicketOwController(rc.getCode16bits());
+						if(stselect.charAt(0)=='1') {
+							tkowcontrol.getInStationTkow(stselect);
+						}else if(stselect.charAt(0)=='2') {
+							tkowcontrol.getOutStationTkow(stselect);
+						}
+					}else System.out.println("Card or ticket not exist !");
+				}}while(true);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

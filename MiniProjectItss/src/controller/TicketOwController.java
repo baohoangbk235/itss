@@ -43,6 +43,12 @@ public class TicketOwController extends ParentController {
 		return this.getTkow().getStatus();
 	}
 
+	/**
+	 * Ghi lại các thông tin của vé và nhà ga vào trong bảng
+	 * passing_history khi hành khách đi vào.
+	 * @param stselect id của nhà ga khi đi vào .
+	 * @throws InterruptedException nếu có lỗi trong quá trình xử lý.
+	 */
 	public void getInStationTkow(String stselect) throws InterruptedException {
 		if(this.checkStatus()) {
 			this.setEnterpoint(String.valueOf(stselect.charAt(2)));
@@ -60,7 +66,13 @@ public class TicketOwController extends ParentController {
 			Screen.printErrorMessTkow();
 		}
 	}
-	
+
+	/**
+	 * Tính toán phí của chuyến đi và ghi lại thông tin của vé, nhà ga, phí cua chuyến đi
+	 * vào trong bảng passing_history khi hành khách đi ra.
+	 * @param stselect id của nhà ga khi đi ra .
+	 * @throws InterruptedException nếu có lỗi trong quá trình xử lý.
+	 */
 	public void getOutStationTkow(String stselect) throws InterruptedException {
 		PassHistoryDTO ph = PassHistoryDAO.getInfoById(this.getTkow().getTkow_id());
 		this.setEnterpoint(ph.getGetin_point());
@@ -80,7 +92,7 @@ public class TicketOwController extends ParentController {
 			Screen.printErrorMess("Ticket one-way", this.getId(), this.getTkow().getPrice(), (float) fare);
 		}
 	}
-	
+
 	public TicketOnewayDTO getTkow() {
 		return tkow;
 	}
