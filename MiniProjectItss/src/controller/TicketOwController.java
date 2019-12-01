@@ -77,7 +77,7 @@ public class TicketOwController extends ParentController {
 		PassHistoryDTO ph = PassHistoryDAO.getInfoById(this.getTkow().getTkow_id());
 		this.setEnterpoint(ph.getGetin_point());
 		this.setExitpoint(String.valueOf(stselect.charAt(2)));
-		double fare = this.caculateTripFare(this.caculateDistance());
+		double fare = this.caculateTripFare();
 		double price = this.getTkow().getPrice();
 		if(this.checkBalance(fare,price)) {
 			this.getTkow().setStatus(false);
