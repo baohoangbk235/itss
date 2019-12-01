@@ -12,12 +12,12 @@
 2. File docx trình bày phần việc của từng thành viên, thuyết minh về cấu trúc hệ thống sau khi chỉnh sửa thỏa mãn yêu cầu đề bài.
 
 **Phần nộp bài của Nhóm 1:**  
-	1. Code: Được chỉnh sửa trong folder MiniProjectItss
-	2. File docx: Filetonghop_W11_G1.docx
+1. Code: Được chỉnh sửa trong folder MiniProjectItss  
+2. File docx: Filetonghop_W11_G1.docx  
 
 **Phân chia công việc:**  
-|Ho ten        		| Nhiem vu           					|Tien do	|
-|-----------------------| ----------------------------------------------------- |---------------|
-|Phạm Ngọc Bá		| Thêm các loại thẻ, vé mới 				|Đã nộp	|
-|Nguyễn Quang Anh	| Thay đổi cách tính phí  				|Đã nộp	|
-|Hoàng Gia Bảo		| Xử lý khi có nhiều tuyến và các tuyến có thể cắt nhau|		|
+|Ho ten        		| Nhiem vu           					|Tien do	|  
+|-----------------------| ----------------------------------------------------- |---------------|  
+|Phạm Ngọc Bá		| Thêm các loại thẻ, vé mới 				|Đã nộp	|  
+|Nguyễn Quang Anh	| Thay đổi cách tính phí  				|Đã nộp	|  
+|Hoàng Gia Bảo		| Xử lý khi có nhiều tuyến và các tuyến có thể cắt nhau|		|  
