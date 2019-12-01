@@ -11,26 +11,23 @@ public class CardsDAOTest {
 	private CardsDTO card;
 	@Before
 	public void setUp() throws Exception {
-		//arr = new ArrayList<CardsDTO>();
-		//card = new CardsDTO();
+		card = new CardsDTO();
 	}
-
-//	@Test
-//	public void testGetAll() {
-//		arr = CardsDAO.getAll();
-//		assertArrayEquals(exp, arr);
-//	}
 
 	@Test
 	public void testGetCardById() {
-		card = CardsDAO.getCardById("cv34567er0abcdef");
-		assertEquals("OK", "cv34567er0abcdef", card.getCard_id());
+		card = CardsDAO.getCardById("testcard00000000");
+		assertEquals("OK", "testcard00000000", card.getCard_id());
 		
 	}
 
-//	@Test
-//	public void testUpdateCard() {
-//		CardsDAO.updateCard(card);
-//	}
+	@Test
+	public void testUpdateCard() {
+		card = CardsDAO.getCardById("testcard00000000");
+		card.setBalance(10);
+		CardsDAO.updateCard(card);
+		CardsDTO card1 = CardsDAO.getCardById("testcard00000000");
+		assertEquals("OK", card1.getBalance(), card.getBalance(), 0);
+	}
 
 }

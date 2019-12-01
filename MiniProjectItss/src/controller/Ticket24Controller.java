@@ -1,29 +1,77 @@
 package controller;
-import dao.Ticket24hDAO;
-import java.util.List;
-import dto.Ticket24hDTO;
-import java.util.Date;
 import java.sql.Timestamp;
-import java.text.ParseException;
 
-public class Ticket24Controller {
-	public static List<Ticket24hDTO> getAll(){
-        return Ticket24hDAO.getAll();
-    }
-	public static boolean checkTimeValidity(Ticket24hDTO ticket24h, Date date_now) {
-		Timestamp timestamp1 = ticket24h.getReleased_time();
-		Date realeasedDate = timestamp1;
-		Timestamp timestamp2 = ticket24h.getValid_time();
-		Date validDate = timestamp2;
-		if (realeasedDate.getTime() <  date_now.getTime() && date_now.getTime() < validDate.getTime())
-			return true;	
+import dao.PassHistoryDAO;
+import dao.Ticket24hDAO;
+import dto.PassHistoryDTO;
+import dto.Ticket24hDTO;
+
+public class Ticket24Controller extends ParentController {
+	private Ticket24hDTO tk24;
+
+	public Ticket24Controller(String id) {
+		super();
+		this.setId(id);
+		this.tk24 = Ticket24hDAO.getTk24ById(this.getId());
+	}
+
+	/**
+	 * Kiểm tra vé 24h còn thời hạn sử dụng không.
+	 * @return Trả về true nếu còn hạn, false nếu ngược lại
+	 */
+	public boolean checkTimeValidity() {
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+		if(this.getTk24().getFirst_use()== null) {
+			this.getTk24().setFirst_use(now);
+			this.getTk24().setValid_time(new Timestamp(now.getTime() + 86400000));
+		}
+		if (now.before(this.getTk24().getValid_time())) {
+			return true;
+		}
 		return false;
 	}
-	
-	public static void main(String[] args) throws ParseException {
-		Ticket24hDAO a = new Ticket24hDAO();
-		Ticket24hDTO b = a.getTk24ById("bab1246b02772bb0");
-		Date date_now = new Date();
-		System.out.println(Ticket24Controller.checkTimeValidity(b, date_now));
+
+	/**
+	 * Ghi lại các thông tin của vé và nhà ga vào trong bảng
+	 * passing_history khi hành khách đi vào.
+	 * @param stselect id của nhà ga khi đi vào .
+	 * @throws InterruptedException nếu có lỗi trong quá trình xử lý.
+	 */
+	public void getInStationTk24(String stselect) {
+		if(this.checkTimeValidity()) {
+			this.setEnterpoint(String.valueOf(stselect.charAt(2)));
+			PassHistoryDTO ph = new PassHistoryDTO(this.getId(),this.getEnterpoint());
+			PassHistoryDAO.insertPassHistory(ph);
+			PassHistoryDTO ph2 = PassHistoryDAO.getInfo(this.getId(), this.getEnterpoint(), ph.getGetin_time());
+			this.getTk24().setLast_pass(ph2.getPass_id());
+			Ticket24hDAO.updateTk24(this.getTk24());
+		}else {
+			System.out.println("Ve da qua thoi gian su dung");
+		}
 	}
+
+	/**
+	 * Ghi lại các thông tin của vé và nhà ga vào trong bảng
+	 * passing_history khi hành khách đi ra.
+	 * @param stselect id của nhà ga khi đi ra.
+	 * @throws InterruptedException nếu có lỗi trong quá trình xử lý.
+	 */
+	public void getOutStationTk24(String stselect) {
+		PassHistoryDTO ph = PassHistoryDAO.getInfoByPassId(this.getTk24().getLast_pass());
+		ph.setGetout_point(String.valueOf(stselect.charAt(2)));
+		ph.setGetout_time(new Timestamp(System.currentTimeMillis()));
+		ph.setStatus(0);
+		PassHistoryDAO.updatePassHistoryById(ph);
+		this.getTk24().setLast_pass(0);
+		Ticket24hDAO.updateTk24(this.getTk24());
+	}
+
+	public Ticket24hDTO getTk24() {
+		return tk24;
+	}
+
+	public void setTk24() {
+		this.tk24 = Ticket24hDAO.getTk24ById(this.getId());
+	}
+
 }
