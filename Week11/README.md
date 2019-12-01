@@ -16,8 +16,6 @@
 2. File docx: Filetonghop_W11_G1.docx  
 
 **Phân chia công việc:**  
-|Ho ten        		| Nhiem vu           					|Tien do	|  
-|-----------------------| ----------------------------------------------------- |---------------|  
 |Phạm Ngọc Bá		| Thêm các loại thẻ, vé mới 				|Đã nộp	|  
 |Nguyễn Quang Anh	| Thay đổi cách tính phí  				|Đã nộp	|  
 |Hoàng Gia Bảo		| Xử lý khi có nhiều tuyến và các tuyến có thể cắt nhau|		|  
