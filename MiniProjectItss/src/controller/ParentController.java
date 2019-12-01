@@ -1,14 +1,15 @@
 package controller;
 
-import dao.StationDAO;
-import dto.StationDTO;
-import util.Constants;
-
 public class ParentController {
 	private String enterpoint;
 	private String exitpoint;
 	private String id;
+	private FareCaculation caculation;
 
+
+	public ParentController() {
+		caculation = new FareCaculation(this.enterpoint,this.exitpoint);
+	}
 
 	/**
 	 * Kiểm tra số dư trong thẻ hoặc vé có đủ để trả phí cho chuyến đi hay không
@@ -24,25 +25,11 @@ public class ParentController {
 		}
 	}
 
-	public float caculateDistance() {
-		StationDTO enterStation = StationDAO.getStationById(this.getEnterpoint());
-		StationDTO exitStation = StationDAO.getStationById(this.getExitpoint());
-		return Math.abs(exitStation.getDistance() - enterStation.getDistance());
-	}
-
-	public double caculateTripFare(float distance) {
-		if(distance <= Constants.BASE_DISTANCE) {
-			return Constants.BASE_FARE;
-		} else {
-			double temp = (distance - Constants.BASE_DISTANCE) % Constants.EXTRA_DISTANCE;
-			int quotient = (int)((distance - Constants.BASE_DISTANCE) / Constants.EXTRA_DISTANCE);
-			if (temp != 0) {
-				return Constants.BASE_FARE + (quotient + 1) * Constants.EXTRA_FARE;
-			} else {
-				return Constants.BASE_FARE + quotient * Constants.EXTRA_FARE;
-			}
-		}
-	}
+	/**
+	 * Tính phí phải tra cho chuyến đi
+	 * @return số tiền tính theo đơn vị euro
+	 */
+	public double caculateTripFare() { return this.caculation.caculateFareByDistance(); }
 
 	public String getEnterpoint() {
 		return enterpoint;
@@ -62,5 +49,7 @@ public class ParentController {
 	public void setId(String id) {
 		this.id = id;
 	}
+	public FareCaculation getCaculation() { return caculation; }
+	public void setCaculation(FareCaculation caculation) { this.caculation = caculation; }
 
 }

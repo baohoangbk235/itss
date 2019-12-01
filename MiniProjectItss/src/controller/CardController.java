@@ -63,7 +63,7 @@ public class CardController extends ParentController {
 		this.setEnterpoint(ph.getGetin_point());
 		this.setExitpoint(String.valueOf(stselect.charAt(2)));
 
-		double fare = this.caculateTripFare(this.caculateDistance());
+		double fare = this.caculateTripFare();
 		double balance = this.getCard().getBalance();
 
 		if(this.checkBalance(fare,balance)) {
