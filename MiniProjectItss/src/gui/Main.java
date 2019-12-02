@@ -2,12 +2,14 @@ package gui;
 
 import java.util.Scanner;
 
+import config.Constants;
 import controller.CardController;
 import controller.Ticket24Controller;
 import controller.TicketOwController;
 import dao.ListTicketDAO;
 import dto.ListTicketDTO;
-import util.Constants;
+import sdk.CScanner;
+import sdk.Recognizer;
 
 public class Main {
 	private static String stselect;
@@ -48,7 +50,6 @@ public class Main {
 					pseudo = keyboard.nextLine().trim();
 				}
 
-
 				if(Main.checkPseudoCode()==1) {
 					CScanner scanner = new CScanner(pseudo);
 					CardController cardcontrol = new CardController(scanner.getCode16bits());
@@ -74,7 +75,7 @@ public class Main {
 						}else if(stselect.charAt(0)=='2') {
 							tkowcontrol.getOutStation(stselect);
 						}
-					}else System.out.println("Card or ticket not exist !");
+					}
 				}}while(true);
 		}catch(Exception e) {
 			e.printStackTrace();

@@ -1,4 +1,4 @@
-package util;
+package config;
 
 import java.sql.*;
 import com.mysql.cj.jdbc.Driver;

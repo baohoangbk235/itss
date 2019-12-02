@@ -1,20 +1,16 @@
 package controller;
 
 import java.sql.Timestamp;
-
+import calculate.CalculateFarebyDistance;
+import config.Constants;
 import dao.CardsDAO;
 import dao.PassHistoryDAO;
 import dto.CardsDTO;
 import dto.PassHistoryDTO;
 import gui.Screen;
-import util.Constants;
 
 public class CardController extends MustChargeFareController {
 	private CardsDTO card;
-
-	public CardController() {
-		super();
-	}
 
 	public CardController(String id) {
 		super();
@@ -66,8 +62,8 @@ public class CardController extends MustChargeFareController {
 		PassHistoryDTO ph = PassHistoryDAO.getInfoByPassId(this.getCard().getLast_pass());
 		this.setEnterpoint(ph.getGetin_point());
 		this.setExitpoint(String.valueOf(stselect.charAt(2)));
-		this.setFare();
-		if(this.checkBalance(this.getCard().getBalance())) {
+		this.setFare(new CalculateFarebyDistance(this.getEnterpoint(), this.getExitpoint()));
+		if(this.checkFare(this.getCard().getBalance())) {
 			this.getCard().setBalance((this.getCard().getBalance()-this.getFare()));
 			this.getCard().setLast_pass(0);
 			ph.setFare(this.getFare());

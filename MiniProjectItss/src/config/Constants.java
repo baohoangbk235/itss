@@ -1,4 +1,4 @@
-package util;
+package config;
 
 public final class Constants {
 	public static final String DB_HOST = "localhost";

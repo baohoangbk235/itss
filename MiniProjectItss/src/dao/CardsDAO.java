@@ -4,8 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import config.ConnectionUtills;
 import dto.CardsDTO;
-import util.ConnectionUtills;
 
 public class CardsDAO {
 	/**

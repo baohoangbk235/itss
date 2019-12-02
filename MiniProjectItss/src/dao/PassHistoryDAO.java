@@ -7,8 +7,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import config.ConnectionUtills;
 import dto.PassHistoryDTO;
-import util.ConnectionUtills;
 
 //import java.util.List;
 

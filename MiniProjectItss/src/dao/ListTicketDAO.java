@@ -3,8 +3,8 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import config.ConnectionUtills;
 import dto.ListTicketDTO;
-import util.ConnectionUtills;
 
 public class ListTicketDAO {
 	/**

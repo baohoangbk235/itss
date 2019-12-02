@@ -1,6 +1,6 @@
 package controller;
 
-public class ParentController {
+public abstract class ParentController {
 	private String enterpoint;
 	private String exitpoint;
 	private String id;
@@ -23,6 +23,4 @@ public class ParentController {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
-
 }
