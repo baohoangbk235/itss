@@ -1,4 +1,4 @@
-package gui;
+package sdk;
 
 import hust.soict.se.gate.Gate;
 
@@ -11,8 +11,6 @@ public class GateInterface {
 	 */
 	public static void open() throws InterruptedException {
 		gate.open();
-//		TimeUnit.SECONDS.sleep(1);
-//		gate.close();
 	}
 	
 	/**

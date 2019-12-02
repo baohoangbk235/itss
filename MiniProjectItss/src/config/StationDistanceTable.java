@@ -1,4 +1,4 @@
-package util;
+package config;
 
 public class StationDistanceTable {
     public static final String TABLE_NAME = "station_distance";

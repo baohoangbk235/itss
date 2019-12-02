@@ -1,4 +1,4 @@
-package gui;
+package sdk;
 
 import hust.soict.se.customexception.InvalidIDException;
 import hust.soict.se.recognizer.TicketRecognizer;

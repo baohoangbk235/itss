@@ -2,6 +2,7 @@ package controller;
 
 import java.sql.Timestamp;
 
+import calculate.CalculateFarebyDistance;
 import dao.PassHistoryDAO;
 import dao.StationDAO;
 import dao.TicketOnewayDAO;
@@ -82,9 +83,9 @@ public class TicketOwController extends MustChargeFareController {
 		PassHistoryDTO ph = PassHistoryDAO.getInfoById(this.getTkow().getTkow_id());
 		this.setEnterpoint(ph.getGetin_point());
 		this.setExitpoint(String.valueOf(stselect.charAt(2)));
-		this.setFare();
+		this.setFare(new CalculateFarebyDistance(this.getEnterpoint(), this.getExitpoint()));
 		float price = this.getTkow().getPrice();
-		if(this.checkBalance(price)) {
+		if(this.checkFare(price)) {
 			this.getTkow().setStatus(false);
 			ph.setFare(this.getFare());
 			ph.setGetout_point(this.getExitpoint());

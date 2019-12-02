@@ -2,6 +2,8 @@ package gui;
 
 import java.sql.Timestamp;
 
+import sdk.GateInterface;
+
 public class Screen {
 	/**
 	   * Phương thức in ra màn hình console list các nhà ga

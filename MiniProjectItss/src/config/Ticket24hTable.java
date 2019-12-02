@@ -1,4 +1,4 @@
-package util;
+package config;
 
 public class Ticket24hTable {
     public static final String TABLE_NAME = "ticket24h";
