@@ -5,8 +5,6 @@ public class ParentController {
 	private String exitpoint;
 	private String id;
 	
-	//public abstract void getInStation();
-	//public abstract void getOutStation();
 	public String getEnterpoint() {
 		return enterpoint;
 	}
