@@ -43,7 +43,7 @@ public class Main {
 
 				Screen.printTicketList();
 				pseudo = keyboard.nextLine().trim();
-				while (!isAvailableAction(pseudo,Constants.ticket_code_pattern) && !pseudo.equals("exit")) {
+				while (!isAvailableAction(pseudo,Constants.ticket_code_pattern)) {
 					System.out.println("Wrong code, please enter code (8-bit) again:");
 					pseudo = keyboard.nextLine().trim();
 				}

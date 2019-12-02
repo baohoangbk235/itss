@@ -72,6 +72,12 @@ public class Ticket24Controller extends HasValidTimeController {
 		PassHistoryDAO.updatePassHistoryById(ph);
 		this.getTk24().setLast_pass(0);
 		Ticket24hDAO.updateTk24(this.getTk24());
+		try {
+			Screen.printOpenMess("Ticket 24h", this.getId(), this.getTk24().getValid_time());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public Ticket24hDTO getTk24() {
