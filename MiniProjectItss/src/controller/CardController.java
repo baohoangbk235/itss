@@ -9,7 +9,7 @@ import dto.PassHistoryDTO;
 import gui.Screen;
 import util.Constants;
 
-public class CardController extends ParentController {
+public class CardController extends MustChargeFareController {
 	private CardsDTO card;
 
 	public CardController() {
@@ -38,7 +38,7 @@ public class CardController extends ParentController {
 	 * @param stselect id của nhà ga khi đi vào .
 	 * @throws InterruptedException nếu có lỗi trong quá trình xử lý.
 	 */
-	public void getInStationCard(String stselect) throws InterruptedException {
+	public void getInStation(String stselect) {
 		if(this.checkBalance()) {
 			this.setEnterpoint(String.valueOf(stselect.charAt(2)));
 			PassHistoryDTO ph = new PassHistoryDTO(this.getId(),this.getEnterpoint());
@@ -46,7 +46,11 @@ public class CardController extends ParentController {
 			PassHistoryDTO ph2 = PassHistoryDAO.getInfo(this.getId(), this.getEnterpoint(), ph.getGetin_time());
 			this.getCard().setLast_pass(ph2.getPass_id());
 			CardsDAO.updateCard(this.getCard());
-			Screen.printOpenMess("Prepaid card", this.getCard().getCard_id(), this.getCard().getBalance());
+			try {
+				Screen.printOpenMess("Prepaid card", this.getCard().getCard_id(), this.getCard().getBalance());
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}else {
 			Screen.printErrorMessCard(this.getCard().getCard_id(), this.getCard().getBalance());
 		}
@@ -58,26 +62,27 @@ public class CardController extends ParentController {
 	 * @param stselect id của nhà ga khi đi ra .
 	 * @throws InterruptedException nếu có lỗi trong quá trình xử lý.
 	 */
-	public void getOutStationCard(String stselect) throws InterruptedException {
+	public void getOutStation(String stselect) {
 		PassHistoryDTO ph = PassHistoryDAO.getInfoByPassId(this.getCard().getLast_pass());
 		this.setEnterpoint(ph.getGetin_point());
 		this.setExitpoint(String.valueOf(stselect.charAt(2)));
-
-		double fare = this.caculateTripFare();
-		double balance = this.getCard().getBalance();
-
-		if(this.checkBalance(fare,balance)) {
-			this.getCard().setBalance((float)(balance-fare));
+		this.setFare();
+		if(this.checkBalance(this.getCard().getBalance())) {
+			this.getCard().setBalance((this.getCard().getBalance()-this.getFare()));
 			this.getCard().setLast_pass(0);
-			ph.setFare((float)fare);
+			ph.setFare(this.getFare());
 			ph.setGetout_point(this.getExitpoint());
 			ph.setGetout_time(new Timestamp(System.currentTimeMillis()));
 			ph.setStatus(0);
 			PassHistoryDAO.updatePassHistoryById(ph);
 			CardsDAO.updateCard(this.getCard());
-			Screen.printOpenMess("Prepaid card", this.getCard().getCard_id(), this.getCard().getBalance());
+			try {
+				Screen.printOpenMess("Prepaid card", this.getCard().getCard_id(), this.getCard().getBalance());
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}else {
-			Screen.printErrorMess("Prepaid card", this.getCard().getCard_id(), this.getCard().getBalance(), (float) fare);
+			Screen.printErrorMess("Prepaid card", this.getCard().getCard_id(), this.getCard().getBalance(), this.getFare());
 		}
 	}
 

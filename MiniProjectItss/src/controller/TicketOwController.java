@@ -10,7 +10,7 @@ import dto.StationDTO;
 import dto.TicketOnewayDTO;
 import gui.Screen;
 
-public class TicketOwController extends ParentController {
+public class TicketOwController extends MustChargeFareController {
 	private TicketOnewayDTO tkow;
 
 	public TicketOwController(String id) {
@@ -49,13 +49,18 @@ public class TicketOwController extends ParentController {
 	 * @param stselect id của nhà ga khi đi vào .
 	 * @throws InterruptedException nếu có lỗi trong quá trình xử lý.
 	 */
-	public void getInStationTkow(String stselect) throws InterruptedException {
+	@Override
+	public void getInStation(String stselect){
 		if(this.checkStatus()) {
 			this.setEnterpoint(String.valueOf(stselect.charAt(2)));
 			if(this.checkEnterStation(this.getEnterpoint())) {
 				PassHistoryDTO ph = new PassHistoryDTO(this.getId(),this.getEnterpoint());
 				PassHistoryDAO.insertPassHistory(ph);
-				Screen.printOpenMess("Ticket one-way", this.getId(), this.getTkow().getPrice());
+				try {
+					Screen.printOpenMess("Ticket one-way", this.getId(), this.getTkow().getPrice());
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}else {
 				StationDTO st = StationDAO.getStationById(this.getEnterpoint());
 				StationDTO st1 = StationDAO.getStationById(this.getTkow().getStart_station());
@@ -73,23 +78,27 @@ public class TicketOwController extends ParentController {
 	 * @param stselect id của nhà ga khi đi ra .
 	 * @throws InterruptedException nếu có lỗi trong quá trình xử lý.
 	 */
-	public void getOutStationTkow(String stselect) throws InterruptedException {
+	public void getOutStation(String stselect){
 		PassHistoryDTO ph = PassHistoryDAO.getInfoById(this.getTkow().getTkow_id());
 		this.setEnterpoint(ph.getGetin_point());
 		this.setExitpoint(String.valueOf(stselect.charAt(2)));
-		double fare = this.caculateTripFare();
-		double price = this.getTkow().getPrice();
-		if(this.checkBalance(fare,price)) {
+		this.setFare();
+		float price = this.getTkow().getPrice();
+		if(this.checkBalance(price)) {
 			this.getTkow().setStatus(false);
-			ph.setFare((float)fare);
+			ph.setFare(this.getFare());
 			ph.setGetout_point(this.getExitpoint());
 			ph.setGetout_time(new Timestamp(System.currentTimeMillis()));
 			ph.setStatus(0);
 			PassHistoryDAO.updatePassHistoryById(ph);
 			TicketOnewayDAO.updateTkow(this.getTkow());
-			Screen.printOpenMess("Ticket one-way", this.getId(), this.getTkow().getPrice());
+			try {
+				Screen.printOpenMess("Ticket one-way", this.getId(), this.getTkow().getPrice());
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}else {
-			Screen.printErrorMess("Ticket one-way", this.getId(), this.getTkow().getPrice(), (float) fare);
+			Screen.printErrorMess("Ticket one-way", this.getId(), this.getTkow().getPrice(), this.getFare());
 		}
 	}
 

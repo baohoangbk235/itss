@@ -53,9 +53,9 @@ public class Main {
 					CScanner scanner = new CScanner(pseudo);
 					CardController cardcontrol = new CardController(scanner.getCode16bits());
 					if(stselect.charAt(0)=='1') {
-						cardcontrol.getInStationCard(stselect);
+						cardcontrol.getInStation(stselect);
 					}else if(stselect.charAt(0)=='2') {
-						cardcontrol.getOutStationCard(stselect);
+						cardcontrol.getOutStation(stselect);
 					}
 				}else if(Main.checkPseudoCode()==0) {
 					Recognizer rc = new Recognizer(pseudo);
@@ -63,16 +63,16 @@ public class Main {
 					if(ticket.getType().equals("ticket24h")) {
 						Ticket24Controller tk24control = new Ticket24Controller(rc.getCode16bits());
 						if(stselect.charAt(0)=='1') {
-							tk24control.getInStationTk24(stselect);
+							tk24control.getInStation(stselect);
 						}else if(stselect.charAt(0)=='2') {
-							tk24control.getOutStationTk24(stselect);
+							tk24control.getOutStation(stselect);
 						}
 					}else if(ticket.getType().equals("ticketoneway")){
 						TicketOwController tkowcontrol = new TicketOwController(rc.getCode16bits());
 						if(stselect.charAt(0)=='1') {
-							tkowcontrol.getInStationTkow(stselect);
+							tkowcontrol.getInStation(stselect);
 						}else if(stselect.charAt(0)=='2') {
-							tkowcontrol.getOutStationTkow(stselect);
+							tkowcontrol.getOutStation(stselect);
 						}
 					}else System.out.println("Card or ticket not exist !");
 				}}while(true);
