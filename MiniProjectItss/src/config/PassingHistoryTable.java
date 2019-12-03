@@ -1,4 +1,4 @@
-package util;
+package config;
 
 public final class PassingHistoryTable {
     public static final String TABLE_NAME = "passing_history";

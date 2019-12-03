@@ -5,8 +5,9 @@ import dao.PassHistoryDAO;
 import dao.Ticket24hDAO;
 import dto.PassHistoryDTO;
 import dto.Ticket24hDTO;
+import gui.Message;
 
-public class Ticket24Controller extends ParentController {
+public class Ticket24Controller extends HasValidTimeController {
 	private Ticket24hDTO tk24;
 
 	public Ticket24Controller(String id) {
@@ -37,7 +38,8 @@ public class Ticket24Controller extends ParentController {
 	 * @param stselect id của nhà ga khi đi vào .
 	 * @throws InterruptedException nếu có lỗi trong quá trình xử lý.
 	 */
-	public void getInStationTk24(String stselect) {
+	@Override
+	public void getInStation(String stselect){
 		if(this.checkTimeValidity()) {
 			this.setEnterpoint(String.valueOf(stselect.charAt(2)));
 			PassHistoryDTO ph = new PassHistoryDTO(this.getId(),this.getEnterpoint());
@@ -45,8 +47,13 @@ public class Ticket24Controller extends ParentController {
 			PassHistoryDTO ph2 = PassHistoryDAO.getInfo(this.getId(), this.getEnterpoint(), ph.getGetin_time());
 			this.getTk24().setLast_pass(ph2.getPass_id());
 			Ticket24hDAO.updateTk24(this.getTk24());
+			try {
+				Message.printOpenMess("Ticket 24h", this.getId(), this.getTk24().getValid_time());
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}else {
-			System.out.println("Ve da qua thoi gian su dung");
+			Message.printErrorMess("Ticket 24h", this.getId(), this.getTk24().getValid_time(),new Timestamp(System.currentTimeMillis()) );
 		}
 	}
 
@@ -56,7 +63,8 @@ public class Ticket24Controller extends ParentController {
 	 * @param stselect id của nhà ga khi đi ra.
 	 * @throws InterruptedException nếu có lỗi trong quá trình xử lý.
 	 */
-	public void getOutStationTk24(String stselect) {
+	@Override
+	public void getOutStation(String stselect) {
 		PassHistoryDTO ph = PassHistoryDAO.getInfoByPassId(this.getTk24().getLast_pass());
 		ph.setGetout_point(String.valueOf(stselect.charAt(2)));
 		ph.setGetout_time(new Timestamp(System.currentTimeMillis()));
@@ -64,6 +72,12 @@ public class Ticket24Controller extends ParentController {
 		PassHistoryDAO.updatePassHistoryById(ph);
 		this.getTk24().setLast_pass(0);
 		Ticket24hDAO.updateTk24(this.getTk24());
+		try {
+			Message.printOpenMess("Ticket 24h", this.getId(), this.getTk24().getValid_time());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public Ticket24hDTO getTk24() {
@@ -73,5 +87,4 @@ public class Ticket24Controller extends ParentController {
 	public void setTk24() {
 		this.tk24 = Ticket24hDAO.getTk24ById(this.getId());
 	}
-
 }

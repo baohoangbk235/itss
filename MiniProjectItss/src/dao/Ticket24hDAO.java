@@ -4,8 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import config.ConnectionUtills;
 import dto.Ticket24hDTO;
-import util.ConnectionUtills;
 
 public class Ticket24hDAO {
 

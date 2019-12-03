@@ -1,4 +1,4 @@
-package util;
+package config;
 
 public final class Constants {
 	public static final String DB_HOST = "localhost";
@@ -11,10 +11,10 @@ public final class Constants {
 	public static final String ticket_code_pattern = "[a-zA-Z]{8}";
 
 	public static final int BASE_DISTANCE = 5;
-	public static final double BASE_FARE = 1.9;
+	public static final float BASE_FARE = 1.9f;
 	public static final int EXTRA_DISTANCE = 2;
-	public static final double EXTRA_FARE = 0.4;
-	public static final double MIN_BALANCE = 2.5;
+	public static final float EXTRA_FARE = 0.4f;
+	public static final float MIN_BALANCE = 2.5f;
 	private Constants() {}
 }
  

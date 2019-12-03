@@ -1,4 +1,4 @@
-package util;
+package config;
 
 public class StationTable {
     public static final String TABLE_NAME = "station";

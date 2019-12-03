@@ -1,4 +1,4 @@
-package util;
+package config;
 
 public class TicketOneWayTable {
     public static final String TABLE_NAME = "ticket_oneway";
