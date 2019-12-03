@@ -1,13 +1,14 @@
 package controller;
 
 import java.sql.Timestamp;
+
 import calculate.CalculateFarebyDistance;
 import config.Constants;
 import dao.CardsDAO;
 import dao.PassHistoryDAO;
 import dto.CardsDTO;
 import dto.PassHistoryDTO;
-import gui.Screen;
+import gui.Message;
 
 public class CardController extends MustChargeFareController {
 	private CardsDTO card;
@@ -43,12 +44,12 @@ public class CardController extends MustChargeFareController {
 			this.getCard().setLast_pass(ph2.getPass_id());
 			CardsDAO.updateCard(this.getCard());
 			try {
-				Screen.printOpenMess("Prepaid card", this.getCard().getCard_id(), this.getCard().getBalance());
+				Message.printOpenMess("Prepaid card", this.getCard().getCard_id(), this.getCard().getBalance());
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}else {
-			Screen.printErrorMessCard(this.getCard().getCard_id(), this.getCard().getBalance());
+			Message.printErrorMessCard(this.getCard().getCard_id(), this.getCard().getBalance());
 		}
 	}
 
@@ -73,12 +74,12 @@ public class CardController extends MustChargeFareController {
 			PassHistoryDAO.updatePassHistoryById(ph);
 			CardsDAO.updateCard(this.getCard());
 			try {
-				Screen.printOpenMess("Prepaid card", this.getCard().getCard_id(), this.getCard().getBalance());
+				Message.printOpenMess("Prepaid card", this.getCard().getCard_id(), this.getCard().getBalance());
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}else {
-			Screen.printErrorMess("Prepaid card", this.getCard().getCard_id(), this.getCard().getBalance(), this.getFare());
+			Message.printErrorMess("Prepaid card", this.getCard().getCard_id(), this.getCard().getBalance(), this.getFare());
 		}
 	}
 
