@@ -9,7 +9,7 @@ import dao.TicketOnewayDAO;
 import dto.PassHistoryDTO;
 import dto.StationDTO;
 import dto.TicketOnewayDTO;
-import gui.Screen;
+import gui.Message;
 
 public class TicketOwController extends MustChargeFareController {
 	private TicketOnewayDTO tkow;
@@ -58,7 +58,7 @@ public class TicketOwController extends MustChargeFareController {
 				PassHistoryDTO ph = new PassHistoryDTO(this.getId(),this.getEnterpoint());
 				PassHistoryDAO.insertPassHistory(ph);
 				try {
-					Screen.printOpenMess("Ticket one-way", this.getId(), this.getTkow().getPrice());
+					Message.printOpenMess("Ticket one-way", this.getId(), this.getTkow().getPrice());
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -66,10 +66,10 @@ public class TicketOwController extends MustChargeFareController {
 				StationDTO st = StationDAO.getStationById(this.getEnterpoint());
 				StationDTO st1 = StationDAO.getStationById(this.getTkow().getStart_station());
 				StationDTO st2 = StationDAO.getStationById(this.getTkow().getExit_station());
-				Screen.printErrorMessTkow2(this.getTkow().getTkow_id(), this.getTkow().getPrice(), st1.getSt_name(), st2.getSt_name(), st.getSt_name());
+				Message.printErrorMessTkow2(this.getTkow().getTkow_id(), this.getTkow().getPrice(), st1.getSt_name(), st2.getSt_name(), st.getSt_name());
 			}
 		}else {
-			Screen.printErrorMessTkow();
+			Message.printErrorMessTkow();
 		}
 	}
 
@@ -94,12 +94,12 @@ public class TicketOwController extends MustChargeFareController {
 			PassHistoryDAO.updatePassHistoryById(ph);
 			TicketOnewayDAO.updateTkow(this.getTkow());
 			try {
-				Screen.printOpenMess("Ticket one-way", this.getId(), this.getTkow().getPrice());
+				Message.printOpenMess("Ticket one-way", this.getId(), this.getTkow().getPrice());
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}else {
-			Screen.printErrorMess("Ticket one-way", this.getId(), this.getTkow().getPrice(), this.getFare());
+			Message.printErrorMess("Ticket one-way", this.getId(), this.getTkow().getPrice(), this.getFare());
 		}
 	}
 

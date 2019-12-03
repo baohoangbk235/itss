@@ -21,8 +21,7 @@ public abstract class MustChargeFareController extends ParentController {
 	
 	/**
 	 * Kiểm tra số dư trong thẻ hoặc vé có đủ để trả phí cho chuyến đi hay không
-	 * @param fare phí đi lại.
-	 * @param balance số dư trong thẻ hoặc vé.
+	 * @param p Số dư thẻ/Giá tiền mua vé
 	 * @return Trả về true nếu số dư lớn hơn hoặc bằng phí đi lại, false nếu ngược lại
 	 */
 	public boolean checkFare(float p) {

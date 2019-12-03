@@ -5,7 +5,7 @@ import dao.PassHistoryDAO;
 import dao.Ticket24hDAO;
 import dto.PassHistoryDTO;
 import dto.Ticket24hDTO;
-import gui.Screen;
+import gui.Message;
 
 public class Ticket24Controller extends HasValidTimeController {
 	private Ticket24hDTO tk24;
@@ -48,12 +48,12 @@ public class Ticket24Controller extends HasValidTimeController {
 			this.getTk24().setLast_pass(ph2.getPass_id());
 			Ticket24hDAO.updateTk24(this.getTk24());
 			try {
-				Screen.printOpenMess("Ticket 24h", this.getId(), this.getTk24().getValid_time());
+				Message.printOpenMess("Ticket 24h", this.getId(), this.getTk24().getValid_time());
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}else {
-			Screen.printErrorMess("Ticket 24h", this.getId(), this.getTk24().getValid_time(),new Timestamp(System.currentTimeMillis()) );
+			Message.printErrorMess("Ticket 24h", this.getId(), this.getTk24().getValid_time(),new Timestamp(System.currentTimeMillis()) );
 		}
 	}
 
@@ -73,7 +73,7 @@ public class Ticket24Controller extends HasValidTimeController {
 		this.getTk24().setLast_pass(0);
 		Ticket24hDAO.updateTk24(this.getTk24());
 		try {
-			Screen.printOpenMess("Ticket 24h", this.getId(), this.getTk24().getValid_time());
+			Message.printOpenMess("Ticket 24h", this.getId(), this.getTk24().getValid_time());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
