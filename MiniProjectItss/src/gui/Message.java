@@ -1,10 +1,11 @@
 package gui;
 
 import java.sql.Timestamp;
-
+import java.text.DecimalFormat;
 import sdk.GateInterface;
 
 public class Message {
+	public static DecimalFormat df = new DecimalFormat("0.00");
 	/**
 	   * In ra thông thông báo mở cổng, và các thông tin của ticket one-way hay card đã được sử dụng để đi qua.
 	   * @param type Loại vé hay card
@@ -15,7 +16,7 @@ public class Message {
 	public static void printOpenMess(String type, String id, float balance) throws InterruptedException{
 		GateInterface.open();
 		System.out.println("Type: "+type+"\t\tId: "+id);
-		System.out.println("Balance: "+balance);
+		System.out.println("Balance: "+df.format(balance));
 		Message.pressAnyKeyToContinue();
 	}
 	
@@ -42,8 +43,8 @@ public class Message {
 	   */
 	public static void printErrorMess(String type, String id, float balance, float fare) {
 		System.out.println("Invalid "+type);
-		System.out.println("Id: "+id+", balance: "+balance+" euros");
-		System.out.println("Not enough balance: Expected "+fare+" euros");
+		System.out.println("Id: "+id+", balance: "+df.format(balance)+" euros");
+		System.out.println("Not enough balance: Expected "+df.format(fare)+" euros");
 		Message.pressAnyKeyToContinue();
 	}
 	
@@ -68,7 +69,7 @@ public class Message {
 	   */
 	public static void printErrorMessCard(String id, float balance) {
 		System.out.println("Invalid prepaid card");
-		System.out.println("Id: "+id+", balance: "+balance+" euros");
+		System.out.println("Id: "+id+", balance: "+df.format(balance)+" euros");
 		System.out.println("The balance is lower 2.5 euros");
 		System.out.println("Please recharge to continue using");
 		Message.pressAnyKeyToContinue();
@@ -94,7 +95,7 @@ public class Message {
 	   */
 	public static void printErrorMessTkow2(String id, float price, String st1, String st2, String st) {
 		System.out.println("Invalid one-way ticket");
-		System.out.println("Id: "+id+", balance: "+price+" euros");
+		System.out.println("Id: "+id+", balance: "+df.format(price)+" euros");
 		System.out.println("One-way ticket between "+st1+" and "+st2);
 		System.out.println("Out of range: Try to enter station: "+ st);
 		Message.pressAnyKeyToContinue();
