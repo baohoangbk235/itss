@@ -7,11 +7,11 @@ import sdk.GateInterface;
 public class Message {
 	public static DecimalFormat df = new DecimalFormat("0.00");
 	/**
-	   * In ra thÃ´ng thÃ´ng bÃ¡o má»Ÿ cá»•ng, vÃ  cÃ¡c thÃ´ng tin cá»§a ticket one-way hay card Ä‘Ã£ Ä‘Æ°á»£c sá»­ dá»¥ng Ä‘á»ƒ Ä‘i qua.
-	   * @param type Loáº¡i vÃ© hay card
-	   * @param id MÃ£ Ä‘á»‹nh danh cá»§a vÃ©/card
-	   * @param balance GiÃ¡ vÃ©/sá»‘ dÆ° cá»§a tháº»
-	   * @exception InterruptedException Ngoáº¡i lá»‡ cho gate
+	   * In ra thông thông báo mở cổng, và các thông tin của ticket one-way hay card đã được sử dụng để đi qua.
+	   * @param type Loại vé hay card
+	   * @param id Mã định danh của vé/card
+	   * @param balance Giá vé/số dư của thẻ
+	   * @exception InterruptedException Ngoại lệ cho gate
 	   */
 	public static void printOpenMess(String type, String id, float balance) throws InterruptedException{
 		GateInterface.open();
@@ -54,6 +54,7 @@ public class Message {
 	   * @param id Mã định danh của vé 24h
 	   * @param valid Thời hạn của vé 24h
 	   * @param getin_time Thời gian vào cổng
+	   */
 	public static void printErrorMess(String type, String id, Timestamp valid, Timestamp getin_time) {
 		System.out.println("Invalid "+type);
 		System.out.println("Id: "+id+", valid until: "+valid);

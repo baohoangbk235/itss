@@ -81,7 +81,7 @@ public class PassHistoryDAO {
 	
 	/**
 	 * Lấy 1 bản ghi Lịch sử thông hành qua Id của nó
-	 * @param id 
+	 * @param pass_id Định danh của 1 pass history 
 	 * @return Trả về 1 object PassHistoryDTO 
 	 */
 	public static PassHistoryDTO getInfoByPassId(int pass_id) {
